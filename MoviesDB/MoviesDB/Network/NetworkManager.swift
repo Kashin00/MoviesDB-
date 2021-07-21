@@ -14,7 +14,7 @@ enum ApiType {
     case popular
     
     var apiKey: String {
-        return "a19c5b2987101c209439576411e5c98f"
+        return "?a19c5b2987101c209439576411e5c98f"
     }
     
     var baseAPIURL: String {
