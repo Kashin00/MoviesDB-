@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+var arrayResult  = [Movie]()
+
 enum ApiType {
     
     case upcoming
@@ -68,8 +70,9 @@ class NetworkManager {
             }
         }.resume()
     }
+    // здесь пробую
     
-    func fetchTopRatedFilms (onCompletion: @escaping ([Movie]) -> ()) {
+    func fetchTopRatedFilms () {
         let request = ApiType.topRated.request
         
         session.dataTask(with: request) { (data, responce, error) in
@@ -77,8 +80,8 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                arrayResult = movieData.movies
             } catch {
                 print(error)
             }
@@ -86,7 +89,7 @@ class NetworkManager {
     }
     
     func fetchUpcomingFilms (onCompletion: @escaping ([Movie]) -> ()) {
-        let request = ApiType.topRated.request
+        let request = ApiType.upcoming.request
         
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
