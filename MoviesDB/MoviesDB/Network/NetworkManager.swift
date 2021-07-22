@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-var arrayResult  = [Movie]()
-
 enum ApiType {
     
     case upcoming
@@ -26,7 +24,7 @@ enum ApiType {
         return "https://api.themoviedb.org/3/"
     }
     var basePosterURL: String {
-        return "https://image.tmdb.org/t/p/w500/"
+        return "https://image.tmdb.org/t/p/w500"
     }
    
     var path: String {
@@ -63,16 +61,15 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }
         }.resume()
     }
-    // здесь пробую
     
-    func fetchTopRatedFilms () {
+    func fetchTopRatedFilms (onCompletion: @escaping ([Movie]) -> ()) {
         let request = ApiType.topRated.request
         
         session.dataTask(with: request) { (data, responce, error) in
@@ -81,7 +78,7 @@ class NetworkManager {
             print(response)
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
-                arrayResult = movieData.movies
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }
@@ -96,8 +93,8 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }
@@ -114,8 +111,8 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }

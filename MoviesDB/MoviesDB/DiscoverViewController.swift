@@ -8,21 +8,28 @@
 import UIKit
 
 class DiscoverViewController: UIViewController {
-
+    
+    private var popularMoviesArray = [Movie]()
+    private var topMovie = [Movie]()
+    private var upcoming = [Movie]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NetworkManager.shared.fetchPopularFilms { (moviesArray: [Movie]) in
+            self.popularMoviesArray = moviesArray
+        }
+        print(popularMoviesArray.count)
+        
+        NetworkManager.shared.fetchTopRatedFilms{(top: [Movie]) in
+            self.topMovie = top
+            print(self.topMovie.count)
+        }
+        
+        //        NetworkManager.shared.fetchUpcomingFilms{(up: [Movie]) in
+        //            self.upcoming = up
+        //            print(self.upcoming[0].posterPath)
+        //        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
