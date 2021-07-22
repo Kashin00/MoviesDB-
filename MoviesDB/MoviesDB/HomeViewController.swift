@@ -51,6 +51,16 @@ private extension HomeViewController {
         }
         filmsTableView.reloadData()
     }
+    
+    //MARK: -Add to favorite swipe
+     func addToFavorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let addToFavotrite = UIContextualAction(style: .destructive, title: "🤍") { (_, _, _) in
+            print("Add to fav")
+        }
+        
+        addToFavotrite.backgroundColor = .red
+        return addToFavotrite
+    }
 }
 
 //MARK: - UITableViewDelegate
@@ -66,9 +76,16 @@ extension HomeViewController: UITableViewDelegate {
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
         
         navigationController?.pushViewController(detailVC, animated: true)
-        
-        
     }
+
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let addToFavorite = self.addToFavorite(rowIndexPath: indexPath)
+        let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
+        return swipe
+    }
+    
+    
 }
 
 //MARK: -UITAbleViewDataSource

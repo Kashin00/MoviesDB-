@@ -70,10 +70,29 @@
                     <view key="view" contentMode="scaleToFill" id="SXF-zi-hYs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NUS-mA-hwo">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="n6k-Nn-w1y" id="Xk5-IK-3D2"/>
+                                    <outlet property="delegate" destination="n6k-Nn-w1y" id="iUX-p5-usf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="WkW-DC-1W6"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="NUS-mA-hwo" firstAttribute="leading" secondItem="WkW-DC-1W6" secondAttribute="leading" id="3Rp-8l-DSM"/>
+                            <constraint firstItem="WkW-DC-1W6" firstAttribute="trailing" secondItem="NUS-mA-hwo" secondAttribute="trailing" id="Ws6-Ft-o6E"/>
+                            <constraint firstItem="NUS-mA-hwo" firstAttribute="top" secondItem="WkW-DC-1W6" secondAttribute="top" id="bnb-Az-xW5"/>
+                            <constraint firstItem="WkW-DC-1W6" firstAttribute="bottom" secondItem="NUS-mA-hwo" secondAttribute="bottom" id="gGG-ab-xmV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favorite" id="fH0-19-hbb"/>
+                    <connections>
+                        <outlet property="filmsTableView" destination="NUS-mA-hwo" id="pqz-uP-N6s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gcx-rY-oji" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,8 +126,23 @@
                     <view key="view" contentMode="scaleToFill" id="7WF-4I-FE7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-GF-fwQ" customClass="DetailView" customModule="MoviesDB" customModuleProvider="target">
+                                <rect key="frame" x="32" y="98" width="350" height="350"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="3lR-9N-St2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="AG9-LK-NUx"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="AG9-LK-NUx" firstAttribute="trailing" secondItem="5ip-GF-fwQ" secondAttribute="trailing" constant="32" id="LWM-xk-5zK"/>
+                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="leading" secondItem="AG9-LK-NUx" secondAttribute="leading" constant="32" id="TOK-DQ-Dqw"/>
+                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="top" secondItem="AG9-LK-NUx" secondAttribute="top" constant="10" id="fKy-bs-WhR"/>
+                            <constraint firstItem="AG9-LK-NUx" firstAttribute="bottom" secondItem="5ip-GF-fwQ" secondAttribute="bottom" constant="365" id="g5y-0c-hHw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Random" id="N9D-46-WA2"/>
                 </viewController>
@@ -123,8 +157,23 @@
                     <view key="view" contentMode="scaleToFill" id="dWA-MA-fu0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKx-Id-ZWX" customClass="DetailView" customModule="MoviesDB" customModuleProvider="target">
+                                <rect key="frame" x="32" y="54" width="350" height="350"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="Btm-Rl-GDZ"/>
+                                    <constraint firstAttribute="height" constant="350" id="fn9-HY-Lvs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dNB-jH-2xO"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="jKx-Id-ZWX" firstAttribute="leading" secondItem="dNB-jH-2xO" secondAttribute="leading" constant="32" id="8fy-Hp-BlF"/>
+                            <constraint firstItem="dNB-jH-2xO" firstAttribute="trailing" secondItem="jKx-Id-ZWX" secondAttribute="trailing" constant="32" id="LJL-ru-bo2"/>
+                            <constraint firstItem="jKx-Id-ZWX" firstAttribute="top" secondItem="dNB-jH-2xO" secondAttribute="top" constant="10" id="rg0-SM-YqQ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwM-Qh-bLW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -210,6 +259,9 @@
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

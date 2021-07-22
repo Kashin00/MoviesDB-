@@ -9,11 +9,10 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailView: DetailView!
+    @IBOutlet weak private var detailView: DetailView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
     }
 }
