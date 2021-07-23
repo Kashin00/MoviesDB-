@@ -16,6 +16,7 @@ class DetailView: UIView {
     @IBOutlet weak private var posterImageView: UIImageView!
     @IBOutlet weak private var descriptionTextView: UITextView!
     
+        
     override init(frame: CGRect) {
             super.init(frame: frame)
             configureView()
@@ -26,11 +27,16 @@ class DetailView: UIView {
             configureView()
         }
     
-    public func setUpView() {
+    public func setUpView(movie: Movie) {
+        let _: () = MovieManager.shared.getImage(posterPath:movie.posterPath ?? "")
+        let movieImage = MovieManager.shared.image
         
+        nameLabel.text = movie.title
+        descriptionTextView.text = movie.overview
+        posterImageView.image = movieImage
     }
     
-    }
+}
 
     private extension DetailView {
         

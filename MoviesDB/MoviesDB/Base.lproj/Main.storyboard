@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -135,16 +136,55 @@
                                     <constraint firstAttribute="height" constant="350" id="eFe-lO-43X"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="170" translatesAutoresizingMaskIntoConstraints="NO" id="icW-iL-AoP">
+                                <rect key="frame" x="50" y="648" width="314" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ge1-zS-ZBe">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="hHr-DD-PBI"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <state key="normal" image="heart.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapAddToFavoriteBurron:" destination="tLY-ds-wSo" eventType="touchUpInside" id="MBM-Ak-XlD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYS-da-z6o">
+                                        <rect key="frame" x="242" y="0.0" width="72" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="ZdS-4p-bbg"/>
+                                        </constraints>
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="forward.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapNextFilmButton:" destination="tLY-ds-wSo" eventType="touchUpInside" id="3eT-ZG-gFj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AG9-LK-NUx"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="5ip-GF-fwQ" firstAttribute="top" secondItem="AG9-LK-NUx" secondAttribute="top" constant="10" id="59u-6x-KPs"/>
                             <constraint firstItem="5ip-GF-fwQ" firstAttribute="leading" secondItem="AG9-LK-NUx" secondAttribute="leading" constant="32" id="Iwf-g1-iBN"/>
+                            <constraint firstItem="icW-iL-AoP" firstAttribute="leading" secondItem="AG9-LK-NUx" secondAttribute="leading" constant="50" id="PwF-wV-akF"/>
+                            <constraint firstItem="AG9-LK-NUx" firstAttribute="bottom" secondItem="icW-iL-AoP" secondAttribute="bottom" constant="35" id="VM5-2v-Tlr"/>
                             <constraint firstItem="AG9-LK-NUx" firstAttribute="trailing" secondItem="5ip-GF-fwQ" secondAttribute="trailing" constant="32" id="fug-eF-eFB"/>
+                            <constraint firstItem="icW-iL-AoP" firstAttribute="top" secondItem="5ip-GF-fwQ" secondAttribute="bottom" constant="200" id="gJX-rQ-MLT"/>
+                            <constraint firstItem="AG9-LK-NUx" firstAttribute="trailing" secondItem="icW-iL-AoP" secondAttribute="trailing" constant="50" id="jaM-y5-LLn"/>
+                            <constraint firstItem="icW-iL-AoP" firstAttribute="centerX" secondItem="5ip-GF-fwQ" secondAttribute="centerX" id="mtn-Oq-nru"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Random" id="N9D-46-WA2"/>
+                    <connections>
+                        <outlet property="detailView" destination="5ip-GF-fwQ" id="ZuU-Qk-yA4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0L-qj-Xe0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -246,6 +286,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="forward.fill" catalog="system" width="128" height="79"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
@@ -254,6 +296,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

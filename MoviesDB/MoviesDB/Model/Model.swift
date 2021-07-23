@@ -75,6 +75,7 @@ struct Movie: Decodable {
             }
             } }
         ganre = newGanre
+        
     }
 }
 // MARK: - Genre
