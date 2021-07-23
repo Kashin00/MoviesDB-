@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var searchBar: UISearchBar!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
-    private var selectedIndex = 0
+    private var moviesArray = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +43,11 @@ private extension HomeViewController {
     
     @objc func segmentTarget() {
         if segmentControl.selectedSegmentIndex == 0 {
-            selectedIndex = 0
+   
         }else if segmentControl.selectedSegmentIndex == 1 {
-            selectedIndex = 1
+            
         }else if segmentControl.selectedSegmentIndex == 2 {
-            selectedIndex = 2
+ 
         }
         filmsTableView.reloadData()
     }
@@ -55,7 +55,7 @@ private extension HomeViewController {
     //MARK: -Add to favorite swipe
      func addToFavorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
         let addToFavotrite = UIContextualAction(style: .destructive, title: "🤍") { (_, _, _) in
-            print("Add to fav")
+            //add to favorite
         }
         
         addToFavotrite.backgroundColor = .red
@@ -71,10 +71,10 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        filmsTableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-        
+
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
@@ -91,15 +91,8 @@ extension HomeViewController: UITableViewDelegate {
 //MARK: -UITAbleViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if selectedIndex == 0 {
-            return 100
-        } else if selectedIndex == 1 {
-            return 1
-        }else if selectedIndex == 2 {
-            return 4
-        }
-        return 0
+//        return moviesArray.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,6 +108,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
         searchBar.resignFirstResponder()
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 class FilmsTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var nameLabel: UILabel!
-    @IBOutlet weak private var infoTextView: UITextView!
+    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak private var posterImageView: UIImageView!
     
     public func setUpUI() {
