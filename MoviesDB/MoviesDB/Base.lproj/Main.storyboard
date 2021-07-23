@@ -131,24 +131,24 @@
                                 <rect key="frame" x="32" y="98" width="350" height="350"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="3lR-9N-St2"/>
+                                    <constraint firstAttribute="width" constant="350" id="F6A-Ki-JUg"/>
+                                    <constraint firstAttribute="height" constant="350" id="eFe-lO-43X"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AG9-LK-NUx"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
-                            <constraint firstItem="AG9-LK-NUx" firstAttribute="trailing" secondItem="5ip-GF-fwQ" secondAttribute="trailing" constant="32" id="LWM-xk-5zK"/>
-                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="leading" secondItem="AG9-LK-NUx" secondAttribute="leading" constant="32" id="TOK-DQ-Dqw"/>
-                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="top" secondItem="AG9-LK-NUx" secondAttribute="top" constant="10" id="fKy-bs-WhR"/>
-                            <constraint firstItem="AG9-LK-NUx" firstAttribute="bottom" secondItem="5ip-GF-fwQ" secondAttribute="bottom" constant="365" id="g5y-0c-hHw"/>
+                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="top" secondItem="AG9-LK-NUx" secondAttribute="top" constant="10" id="59u-6x-KPs"/>
+                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="leading" secondItem="AG9-LK-NUx" secondAttribute="leading" constant="32" id="Iwf-g1-iBN"/>
+                            <constraint firstItem="AG9-LK-NUx" firstAttribute="trailing" secondItem="5ip-GF-fwQ" secondAttribute="trailing" constant="32" id="fug-eF-eFB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Random" id="N9D-46-WA2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0L-qj-Xe0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-600" y="1000"/>
+            <point key="canvasLocation" x="-600" y="999.77678571428567"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="616-8k-wHc">
@@ -158,22 +158,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jKx-Id-ZWX" customClass="DetailView" customModule="MoviesDB" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKx-Id-ZWX" customClass="DetailView" customModule="MoviesDB" customModuleProvider="target">
                                 <rect key="frame" x="32" y="54" width="350" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="Btm-Rl-GDZ"/>
-                                    <constraint firstAttribute="height" constant="350" id="fn9-HY-Lvs"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dNB-jH-2xO"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
-                        <constraints>
-                            <constraint firstItem="jKx-Id-ZWX" firstAttribute="leading" secondItem="dNB-jH-2xO" secondAttribute="leading" constant="32" id="8fy-Hp-BlF"/>
-                            <constraint firstItem="dNB-jH-2xO" firstAttribute="trailing" secondItem="jKx-Id-ZWX" secondAttribute="trailing" constant="32" id="LJL-ru-bo2"/>
-                            <constraint firstItem="jKx-Id-ZWX" firstAttribute="top" secondItem="dNB-jH-2xO" secondAttribute="top" constant="10" id="rg0-SM-YqQ"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwM-Qh-bLW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -184,7 +176,7 @@
         <scene sceneID="ogE-fS-iBw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IWL-kz-e3X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" selectedImage="homekit" catalog="system" id="BFe-7V-lTf"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" selectedImage="homekit" id="BFe-7V-lTf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="c4e-Ec-h1P">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -210,7 +202,7 @@
         <scene sceneID="P8S-2e-lGf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IIg-ee-dmr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Discover" selectedImage="magnifyingglass" catalog="system" id="Se8-hJ-ZDk"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" selectedImage="magnifyingglass" id="Se8-hJ-ZDk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tpx-lK-Tf4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -233,7 +225,7 @@
         <scene sceneID="1KV-X6-UWr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CKX-NV-eGf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorite" selectedImage="star.fill" catalog="system" id="Mp2-fJ-sJi"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="star.fill" catalog="system" selectedImage="star.fill" id="Mp2-fJ-sJi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uKm-Aq-lEC">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

@@ -33,11 +33,19 @@ extension FavoriteViewController: UITableViewDelegate {
         switch editingStyle {
         case .delete:
 
-            tableView.deleteRows(at: [indexPath], with: .left)
-            print("del")
+            filmsTableView.deleteRows(at: [indexPath], with: .left)
+          
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        filmsTableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
+
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
