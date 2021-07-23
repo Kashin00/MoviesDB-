@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		BAB2491526A70A2A00744010 /* FilmsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB2491326A70A2A00744010 /* FilmsTableViewCell.xib */; };
 		BAB2491E26A8033F00744010 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB2491D26A8033F00744010 /* DetailView.xib */; };
 		BAB2492426A8064A00744010 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB2492326A8064A00744010 /* DetailView.swift */; };
+		BAB2494B26AAD25500744010 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BAB2494A26AAD25500744010 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		BAB2491326A70A2A00744010 /* FilmsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilmsTableViewCell.xib; sourceTree = "<group>"; };
 		BAB2491D26A8033F00744010 /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		BAB2492326A8064A00744010 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		BAB2494A26AAD25500744010 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../../.gitignore; sourceTree = "<group>"; };
 		EA3FCE2430F4337B9D3147B2 /* Pods-MoviesDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesDB.release.xcconfig"; path = "Target Support Files/Pods-MoviesDB/Pods-MoviesDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,7 +78,6 @@
 				42899ACBC6CD29C707F2D930 /* Pods-MoviesDB.debug.xcconfig */,
 				EA3FCE2430F4337B9D3147B2 /* Pods-MoviesDB.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -118,6 +119,7 @@
 		BA99010926A6E12800D040BA /* MoviesDB */ = {
 			isa = PBXGroup;
 			children = (
+				BAB2494A26AAD25500744010 /* .gitignore */,
 				8436B47826A73C5800D3C543 /* Network */,
 				8436B48526A767D200D3C543 /* Model */,
 				BA99010A26A6E12800D040BA /* AppDelegate.swift */,
@@ -217,6 +219,7 @@
 				BAB2491526A70A2A00744010 /* FilmsTableViewCell.xib in Resources */,
 				BA99011426A6E12A00D040BA /* Assets.xcassets in Resources */,
 				BA99011226A6E12800D040BA /* Main.storyboard in Resources */,
+				BAB2494B26AAD25500744010 /* .gitignore in Resources */,
 				BAB2491E26A8033F00744010 /* DetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

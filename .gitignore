@@ -88,3 +88,171 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+MoviesDB/Podfile.lock
+MoviesDB/MoviesDB.xcworkspace/contents.xcworkspacedata
+MoviesDB/MoviesDB.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+MoviesDB/Pods/Pods.xcodeproj/project.pbxproj
+MoviesDB/Pods/SDWebImage/LICENSE
+MoviesDB/Pods/SDWebImage/README.md
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/NSButton+WebCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/NSButton+WebCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/NSData+ImageContentType.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/NSData+ImageContentType.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/NSImage+Compatibility.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/NSImage+Compatibility.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImage.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImage.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImagePlayer.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImagePlayer.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageRep.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageRep.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView+WebCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView+WebCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDAnimatedImageView.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDDiskCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDDiskCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDGraphicsImageRenderer.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDGraphicsImageRenderer.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageAPNGCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageAPNGCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageAWebPCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageAWebPCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCacheConfig.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCacheConfig.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCacheDefine.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCacheDefine.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCachesManager.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCachesManager.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCoderHelper.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCoderHelper.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCodersManager.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageCodersManager.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageFrame.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageFrame.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageGIFCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageGIFCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageGraphics.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageGraphics.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageHEICCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageHEICCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageIOAnimatedCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageIOAnimatedCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageIOCoder.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageIOCoder.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageLoader.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageLoader.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageLoadersManager.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageLoadersManager.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageTransformer.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDImageTransformer.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDMemoryCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDMemoryCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheKeyFilter.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheKeyFilter.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheSerializer.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageCacheSerializer.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageCompat.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageCompat.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDefine.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDefine.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloader.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloader.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderConfig.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderConfig.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderDecryptor.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderDecryptor.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderOperation.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderOperation.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderRequestModifier.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderRequestModifier.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderResponseModifier.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageDownloaderResponseModifier.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageError.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageError.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageIndicator.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageIndicator.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageManager.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageManager.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageOperation.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageOperation.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageOptionsProcessor.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageOptionsProcessor.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImagePrefetcher.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImagePrefetcher.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageTransition.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/SDWebImageTransition.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIButton+WebCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIButton+WebCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+ExtendedCacheData.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+ExtendedCacheData.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+ForceDecode.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+ForceDecode.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+GIF.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+GIF.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+MemoryCacheCost.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+MemoryCacheCost.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+Metadata.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+Metadata.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+MultiFormat.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+MultiFormat.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+Transform.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImage+Transform.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImageView+HighlightedWebCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImageView+HighlightedWebCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImageView+WebCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIImageView+WebCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIView+WebCache.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIView+WebCache.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIView+WebCacheOperation.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Core/UIView+WebCacheOperation.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/NSBezierPath+SDRoundedCorners.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/NSBezierPath+SDRoundedCorners.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDAssociatedObject.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDAssociatedObject.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDAsyncBlockOperation.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDAsyncBlockOperation.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDDeviceHelper.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDDeviceHelper.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDDisplayLink.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDDisplayLink.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDFileAttributeHelper.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDFileAttributeHelper.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDImageAssetManager.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDImageAssetManager.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDImageCachesManagerOperation.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDImageCachesManagerOperation.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDImageIOAnimatedCoderInternal.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDInternalMacros.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDInternalMacros.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDmetamacros.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDWeakProxy.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDWeakProxy.m
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/SDWebImageTransitionInternal.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/UIColor+SDHexString.h
+MoviesDB/Pods/SDWebImage/SDWebImage/Private/UIColor+SDHexString.m
+MoviesDB/Pods/SDWebImage/WebImage/SDWebImage.h
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-acknowledgements.markdown
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-acknowledgements.plist
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-dummy.m
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-frameworks-Debug-input-files.xcfilelist
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-frameworks-Debug-output-files.xcfilelist
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-frameworks-Release-input-files.xcfilelist
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-frameworks-Release-output-files.xcfilelist
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-frameworks.sh
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-Info.plist
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB-umbrella.h
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB.debug.xcconfig
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB.modulemap
+MoviesDB/Pods/Target Support Files/Pods-MoviesDB/Pods-MoviesDB.release.xcconfig
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage-dummy.m
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage-Info.plist
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage-prefix.pch
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage-umbrella.h
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage.debug.xcconfig
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage.modulemap
+MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage.release.xcconfig
