@@ -30,7 +30,7 @@ struct MovieResponce: Decodable {
     }
 }
 // MARK: - Result
-struct Movie: Decodable {
+struct Movie: Decodable, Hashable {
     let posterPath: String?
     let overview: String
     let releaseDate: String?
@@ -41,6 +41,7 @@ struct Movie: Decodable {
     let voteCount: Int
     let voteAverage: Double
     var ganre : [String]
+//    var image: UIImage
 
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"

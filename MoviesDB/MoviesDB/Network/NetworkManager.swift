@@ -61,7 +61,7 @@ class NetworkManager {
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
                   let data = data else { return print(error!) }
-            print(response)
+//            print(response)
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -77,7 +77,7 @@ class NetworkManager {
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
                   let data = data else { return print(error!) }
-            print(response)
+//            print(response)
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -93,7 +93,7 @@ class NetworkManager {
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
                   let data = data else { return print(error!) }
-            print(response)
+//            print(response)
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -109,7 +109,7 @@ class NetworkManager {
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
                   let data = data else { return print(error!) }
-            print(response)
+//            print(response)
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -130,7 +130,7 @@ class NetworkManager {
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
                   let data = data else { return print(error!) }
-            print(response)
+//            print(response)
             do {
                 let movieData = try JSONDecoder().decode( MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -149,7 +149,7 @@ class NetworkManager {
         session.dataTask(with: request) { (data, responce, error) in
             guard let data = data,
                   let response = responce else { return print(error!) }
-            print(response)
+//            print(response)
             
             DispatchQueue.main.async {
                 onCompletion(UIImage(data: data)!)

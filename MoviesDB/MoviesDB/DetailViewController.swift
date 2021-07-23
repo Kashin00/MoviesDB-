@@ -10,7 +10,7 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak private var detailView: DetailView!
+    @IBOutlet weak  var detailView: DetailView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

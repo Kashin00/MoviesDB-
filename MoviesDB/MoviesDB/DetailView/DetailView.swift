@@ -26,8 +26,9 @@ class DetailView: UIView {
             configureView()
         }
     
-    public func setUpView() {
-        
+    public func setUpView(model: Movie) {
+        nameLabel.text = model.title
+        descriptionTextView.text = model.overview
     }
     
     }
