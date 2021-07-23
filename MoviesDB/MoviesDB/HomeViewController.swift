@@ -15,9 +15,11 @@ class HomeViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedIndex = 0
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setUpUI()
     }
 }
@@ -105,7 +107,6 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
     return UITableViewCell() }
-        
         
         return cell
     }

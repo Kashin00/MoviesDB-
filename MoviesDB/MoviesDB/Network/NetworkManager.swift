@@ -13,8 +13,9 @@ enum ApiType {
     case upcoming
     case topRated
     case popular
-    case search
+    case random
     case poster
+    case search
     
     var apiKey: String {
         return "?api_key=a19c5b2987101c209439576411e5c98f"
@@ -24,16 +25,17 @@ enum ApiType {
         return "https://api.themoviedb.org/3/"
     }
     var basePosterURL: String {
-        return "https://image.tmdb.org/t/p/w500/"
+        return "https://image.tmdb.org/t/p/w500"
     }
    
     var path: String {
         switch self {
-        case .upcoming: return "movie/upcoming" + apiKey
+        case .upcoming: return "movie/upcoming" + apiKey 
         case .topRated: return "movie/top_rated" + apiKey
         case .popular: return "movie/popular" + apiKey
-        case .search: return baseAPIURL + "search/movie" + apiKey + "&query="
+        case .random: return  "trending/movie/week" + apiKey
         case .poster: return basePosterURL
+        case .search: return  baseAPIURL + "search/movie" + apiKey + "&query="
         }
     }
     
@@ -61,8 +63,8 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }
@@ -77,8 +79,8 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }
@@ -86,15 +88,31 @@ class NetworkManager {
     }
     
     func fetchUpcomingFilms (onCompletion: @escaping ([Movie]) -> ()) {
-        let request = ApiType.topRated.request
+        let request = ApiType.upcoming.request
         
         session.dataTask(with: request) { (data, responce, error) in
             guard let response = responce,
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    func getRandomFilms (onCompletion: @escaping ([Movie]) -> ()) {
+        let request = ApiType.random.request
+        
+        session.dataTask(with: request) { (data, responce, error) in
+            guard let response = responce,
+                  let data = data else { return print(error!) }
+            print(response)
+            do {
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }
@@ -102,7 +120,10 @@ class NetworkManager {
     }
     
     func getSearchResults (searchTerm: String, onCompletion: @escaping ([Movie]) -> ()) {
-        guard let url = URL(string: ApiType.search.path + searchTerm) else { return }
+        
+        let endUrl = searchTerm.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
+        
+        guard let url = URL(string: ApiType.search.path + endUrl) else { return }
         
         let request = URLRequest(url: url)
         
@@ -111,8 +132,8 @@ class NetworkManager {
                   let data = data else { return print(error!) }
             print(response)
             do {
-                let movieData = try JSONDecoder().decode( [Movie].self, from: data)
-                onCompletion(movieData)
+                let movieData = try JSONDecoder().decode( MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
             } catch {
                 print(error)
             }

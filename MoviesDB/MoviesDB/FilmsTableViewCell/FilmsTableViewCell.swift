@@ -13,8 +13,15 @@ class FilmsTableViewCell: UITableViewCell {
     @IBOutlet weak private var infoTextView: UITextView!
     @IBOutlet weak private var posterImageView: UIImageView!
     
-    public func setUpUI() {
+    public func setUpUI(model: Movie) {
         
+//        NetworkManager.shared.getPosterImage(posterPath: (model.posterPath) ?? "0") { (image) in
+//            self.posterImageView.image = image
+//        }
+//
+//        nameLabel.text = model.title
+//        infoTextView.text = model.overview
+        //posterImageView.image =
     }
     
 }
