@@ -15,12 +15,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var searchBar: UISearchBar!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
-    private var moviesArray = [Movie]()
     private var selectedSection = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var array = [1, 2, 3, 4, 5]
         
 
         print("rr", MovieManager.shared.popularMovies.count)
