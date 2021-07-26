@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var searchBar: UISearchBar!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
-    private var selectedIndex = 0
+    private var selectedSection = 0
    
     
     override func viewDidLoad() {

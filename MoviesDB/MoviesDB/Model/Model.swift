@@ -30,7 +30,7 @@ struct MovieResponce: Decodable {
     }
 }
 // MARK: - Result
-struct Movie: Decodable {
+struct Movie: Decodable, Hashable {
     let posterPath: String?
     let overview: String
     let releaseDate: String?

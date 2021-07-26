@@ -12,7 +12,7 @@ class DiscoverViewController: UIViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
-    private var arrayOfFavoriteMovies: [Movie] = MovieManager.shared.favoriteMovies
+    //private var arrayOfFavoriteMovies: [Movie] = MovieManager.shared.favoriteMovies
     private var arrayOfRandomMovies: [Movie] = MovieManager.shared.randomMovies
     
     
