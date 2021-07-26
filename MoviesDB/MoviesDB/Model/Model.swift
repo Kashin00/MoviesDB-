@@ -41,8 +41,9 @@ struct Movie: Decodable, Hashable, Equatable {
     let voteCount: Int
     let voteAverage: Double
     var ganre : [String]
+    let originalLanguage: String?
     var image = UIImage(named: "unknown")
-
+    
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"
         case overview
@@ -54,11 +55,12 @@ struct Movie: Decodable, Hashable, Equatable {
         case popularity
         case voteCount = "vote_count"
         case voteAverage = "vote_average"
+        case originalLanguage = "original_language"
     }
     
     init(from decoder: Decoder) throws {
         let movieContainer = try decoder.container(keyedBy: CodingKeys.self)
-        posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
+        posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)
         overview = try movieContainer.decode(String.self, forKey: .overview)
         releaseDate = try? movieContainer.decode(String.self, forKey: .releaseDate)
         genreIDS = try movieContainer.decode([Int].self, forKey: .genreIDS)
@@ -67,16 +69,17 @@ struct Movie: Decodable, Hashable, Equatable {
         popularity = try movieContainer.decode(Double.self, forKey: .popularity)
         voteCount = try movieContainer.decode(Int.self, forKey: .voteCount)
         voteAverage = try movieContainer.decode(Double.self, forKey: .voteAverage)
-
+        originalLanguage = try? movieContainer.decode(String.self, forKey: .originalLanguage)
+        
         var newGanre = [String]()
         let ganreAllIDS = genreIDS
         ganreAllIDS.forEach { (ganreId: Int) in
             Genre.ganresArray.forEach{ if $0.id == ganreId {
                 newGanre.append($0.name)
             }
-            } }
+            }
+        }
         ganre = newGanre
-        
     }
 }
 // MARK: - Genre
@@ -104,3 +107,4 @@ static let ganresArray: [Genre] = [Genre (id: 28, name: "Action"),
                             Genre (id: 10752, name: "War"),
                             Genre (id: 37, name: "Western")]
 }
+

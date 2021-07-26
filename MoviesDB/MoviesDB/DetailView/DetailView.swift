@@ -28,7 +28,6 @@ class DetailView: UIView {
     }
     
     public func setUpView(movie: Movie) {
-        
         nameLabel.text = movie.title
         descriptionTextView.text = movie.overview
         let url = NetworkManager.shared.getImageURL(posterPath: movie.posterPath ?? "")

@@ -16,8 +16,8 @@ class DiscoverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         movie = MovieManager.shared.randomMovies.shuffled()[0]
         guard let movie = movie else { return }
@@ -25,6 +25,7 @@ class DiscoverViewController: UIViewController {
         detailView.setUpView(movie: movie)
         
     }
+    
     @IBAction func tapNextFilmButton(_ sender: UIButton) {
         movie = MovieManager.shared.randomMovies.shuffled()[0]
         guard let movie = movie else { return }
