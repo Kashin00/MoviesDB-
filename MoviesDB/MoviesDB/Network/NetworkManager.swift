@@ -134,12 +134,11 @@ class NetworkManager {
         }.resume()
     }
     
-    func getPosterImage (posterPath: String, onCompletion: @escaping (UIImage) -> ()) {
+    func getImageURL(posterPath: String) -> URL {
         
-        guard let url = URL(string: ApiType.poster.path + posterPath) else { return }
-        let imageView = UIImageView()
-        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "unknown"), options: [.fromCacheOnly, .highPriority], completed: nil)
-        onCompletion(imageView.image ?? UIImage(named: "unknown")!)
+        guard let url = URL(string: ApiType.poster.path + posterPath) else { return URL(string: "")! }
+        return url
+        
     }
 }
 
