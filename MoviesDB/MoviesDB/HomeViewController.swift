@@ -12,12 +12,10 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak private var filmsTableView: UITableView!
     private var segmentControl: UISegmentedControl!
-    @IBOutlet weak private var searchBar: UISearchBar!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,11 +59,17 @@ private extension HomeViewController {
                         
             switch self.selectedSection {
             case 0:
-                MovieManager.shared.favoriteMovies.insert(MovieManager.shared.popularMovies[indexPath.row])
+                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.popularMovies[indexPath.row]) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
+                }
             case 1:
-                MovieManager.shared.favoriteMovies.insert(MovieManager.shared.topRatedMovies[indexPath.row])
+                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.topRatedMovies[indexPath.row]) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
+                }
             case 2:
-                MovieManager.shared.favoriteMovies.insert(MovieManager.shared.upcommingMovies[indexPath.row])
+                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.upcommingMovies[indexPath.row]) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
+                }
             default:
                 break
             }
@@ -88,7 +92,7 @@ extension HomeViewController: UITableViewDelegate {
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
         
-        
+        detailVC.movie = MovieManager.shared.popularMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
@@ -117,14 +121,23 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
     return UITableViewCell() }
-
+        
         switch selectedSection {
         case 0:
             cell.setUpUI(model: MovieManager.shared.popularMovies[indexPath.row])
+            cell.imageSender = { image in
+                MovieManager.shared.popularMovies[indexPath.row].image = image
+            }
         case 1:
             cell.setUpUI(model: MovieManager.shared.topRatedMovies[indexPath.row])
+            cell.imageSender = { image in
+                MovieManager.shared.topRatedMovies[indexPath.row].image = image
+            }
         case 2:
             cell.setUpUI(model: MovieManager.shared.upcommingMovies[indexPath.row])
+            cell.imageSender = { image in
+                MovieManager.shared.upcommingMovies[indexPath.row].image = image
+            }
         default:
             break
         }
@@ -132,16 +145,3 @@ extension HomeViewController: UITableViewDataSource {
     }
 }
 
-//MARK: -UISearchBarDelegate
-extension HomeViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        var movieArray = [Movie]()
-        searchBar.resignFirstResponder()
-        NetworkManager.shared.getSearchResults(searchTerm: searchBar.text ?? "") { (movie) in
-            movieArray = movie
-            print(movieArray)
-        }
-    }
-}

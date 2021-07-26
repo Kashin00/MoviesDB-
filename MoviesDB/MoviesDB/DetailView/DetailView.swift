@@ -28,13 +28,14 @@ class DetailView: UIView {
         }
     
     public func setUpView(movie: Movie) {
-        let _: () = MovieManager.shared.getImage(posterPath:movie.posterPath ?? "")
-        let movieImage = MovieManager.shared.image
-        
+        NetworkManager.shared.getPosterImage(posterPath: movie.posterPath ?? "") { (image) in
+            self.posterImageView.image = image
+        }
         nameLabel.text = movie.title
         descriptionTextView.text = movie.overview
-        posterImageView.image = movieImage
+//        posterImageView.image = movieImage
     }
+
     
 }
 

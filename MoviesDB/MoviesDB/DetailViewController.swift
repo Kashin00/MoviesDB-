@@ -10,10 +10,19 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak private var detailView: DetailView!
+    @IBOutlet weak var detailView: DetailView!
+    var movie: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUp()
+    }
+}
+
+extension DetailViewController {
+    func setUp() {
+        guard let movie = movie else { return }
+        detailView.setUpView(movie: movie)
     }
 }

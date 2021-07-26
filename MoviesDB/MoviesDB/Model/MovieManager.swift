@@ -16,9 +16,8 @@ class MovieManager {
     var upcommingMovies = [Movie]()
     var popularMovies = [Movie]()
     var randomMovies = [Movie]()
-    var favoriteMovies = Set<Movie>()
+    var favoriteMovies = [Movie]()
     var searchArray = [Movie]()
-    var image = UIImage()
     
     private init() {
         NetworkManager.shared.fetchTopRatedFilms{ [self](movie) in
@@ -41,10 +40,4 @@ class MovieManager {
         NetworkManager.shared.getSearchResults(searchTerm: searchWord) { [self] (movies) in
             self.searchArray = movies }
         }
-    func getImage(posterPath: String) {
-        NetworkManager.shared.getPosterImage(posterPath: posterPath) { (image) in
-            self.image = image
-        }
-    }
-    
 }

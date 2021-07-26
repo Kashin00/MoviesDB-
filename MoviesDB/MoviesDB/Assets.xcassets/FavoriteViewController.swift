@@ -17,6 +17,12 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+//        filmsTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        filmsTableView.reloadData()
     }
 }
 
@@ -33,7 +39,7 @@ extension FavoriteViewController: UITableViewDelegate {
         
         switch editingStyle {
         case .delete:
-
+            MovieManager.shared.favoriteMovies.remove(at: indexPath.row)
             filmsTableView.deleteRows(at: [indexPath], with: .left)
           
         default:
@@ -46,20 +52,22 @@ extension FavoriteViewController: UITableViewDelegate {
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
 
+        detailVC.movie = MovieManager.shared.favoriteMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return MovieManager.shared.favoriteMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
             return UITableViewCell()
         }
-        
+       
+        cell.setUpUI(model: MovieManager.shared.favoriteMovies[indexPath.row])
         return cell
     }
     

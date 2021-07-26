@@ -59,9 +59,8 @@ class NetworkManager {
         let request = ApiType.popular.request
         
         session.dataTask(with: request) { (data, responce, error) in
-            guard let response = responce,
-                  let data = data else { return print(error!) }
-//            print(response)
+            guard  let data = data else { return print(error!) }
+
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -75,9 +74,8 @@ class NetworkManager {
         let request = ApiType.topRated.request
         
         session.dataTask(with: request) { (data, responce, error) in
-            guard let response = responce,
-                  let data = data else { return print(error!) }
-//            print(response)
+            guard let data = data else { return print(error!) }
+
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -91,9 +89,8 @@ class NetworkManager {
         let request = ApiType.upcoming.request
         
         session.dataTask(with: request) { (data, responce, error) in
-            guard let response = responce,
-                  let data = data else { return print(error!) }
-//            print(response)
+            guard let data = data else { return print(error!) }
+
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -107,9 +104,7 @@ class NetworkManager {
         let request = ApiType.random.request
         
         session.dataTask(with: request) { (data, responce, error) in
-            guard let response = responce,
-                  let data = data else { return print(error!) }
-//            print(response)
+            guard let data = data else { return print(error!) }
             do {
                 let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -128,9 +123,8 @@ class NetworkManager {
         let request = URLRequest(url: url)
         
         session.dataTask(with: request) { (data, responce, error) in
-            guard let response = responce,
-                  let data = data else { return print(error!) }
-//            print(response)
+            guard let data = data else { return print(error!) }
+
             do {
                 let movieData = try JSONDecoder().decode( MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
@@ -143,18 +137,9 @@ class NetworkManager {
     func getPosterImage (posterPath: String, onCompletion: @escaping (UIImage) -> ()) {
         
         guard let url = URL(string: ApiType.poster.path + posterPath) else { return }
-        
-        let request = URLRequest(url: url)
-        
-        session.dataTask(with: request) { (data, responce, error) in
-            guard let data = data,
-                  let response = responce else { return print(error!) }
-//            print(response)
-            
-            DispatchQueue.main.async {
-                onCompletion(UIImage(data: data)!)
-            }
-        }.resume()
+        let imageView = UIImageView()
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "unknown"), options: [.fromCacheOnly, .highPriority], completed: nil)
+        onCompletion(imageView.image ?? UIImage(named: "unknown")!)
     }
 }
 
