@@ -91,8 +91,16 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-        
-        detailVC.movie = MovieManager.shared.popularMovies[indexPath.row]
+        switch selectedSection {
+        case 0:
+            detailVC.movie = MovieManager.shared.popularMovies[indexPath.row]
+        case 1:
+            detailVC.movie = MovieManager.shared.topRatedMovies[indexPath.row]
+        case 2:
+            detailVC.movie = MovieManager.shared.upcommingMovies[indexPath.row]
+        default:
+            break
+        }
         navigationController?.pushViewController(detailVC, animated: true)
     }
     

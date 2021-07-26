@@ -17,11 +17,11 @@ class FilmsTableViewCell: UITableViewCell {
     var imageSender: ((UIImage) -> ())?
     
     public func setUpUI(model: Movie) {
-        NetworkManager.shared.getPosterImage(posterPath: model.posterPath ?? "") { (image) in
-            self.posterImageView.image = image
-            self.imageSender?(image)
-        }
+
         nameLabel.text = model.title
-        infoLabel.text = model.overview        
+        infoLabel.text = model.overview
+        let url = NetworkManager.shared.getImageURL(posterPath: model.posterPath ?? "")
+        posterImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "unknown"), options: [], context: nil)
+        imageSender?(posterImageView.image ?? UIImage(named: "unknown")!)
     }
 }
