@@ -16,7 +16,7 @@ class MovieManager {
     var upcommingMovies = [Movie]()
     var popularMovies = [Movie]()
     var randomMovies = [Movie]()
-    var favoriteMovies = [Movie]()
+    var favoriteMovies = Set<Movie>()
     var searchArray = [Movie]()
     var image = UIImage()
     

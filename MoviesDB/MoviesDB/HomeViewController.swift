@@ -46,11 +46,11 @@ private extension HomeViewController {
     
     @objc func segmentTarget() {
         if segmentControl.selectedSegmentIndex == 0 {
-            selectedIndex = 0
+            selectedSection = 0
         }else if segmentControl.selectedSegmentIndex == 1 {
-            selectedIndex = 1
+            selectedSection = 1
         }else if segmentControl.selectedSegmentIndex == 2 {
-            selectedIndex = 2
+            selectedSection = 2
         }
         filmsTableView.reloadData()
     }
@@ -58,14 +58,24 @@ private extension HomeViewController {
     //MARK: -Add to favorite swipe
      func addToFavorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
         let addToFavotrite = UIContextualAction(style: .destructive, title: "🤍") { (_, _, _) in
-            print("Add to fav")
+                        
+            switch self.selectedSection {
+            case 0:
+                MovieManager.shared.favoriteMovies.insert(MovieManager.shared.popularMovies[indexPath.row])
+            case 1:
+                MovieManager.shared.favoriteMovies.insert(MovieManager.shared.topRatedMovies[indexPath.row])
+            case 2:
+                MovieManager.shared.favoriteMovies.insert(MovieManager.shared.upcommingMovies[indexPath.row])
+            default:
+                break
+            }
+            print( MovieManager.shared.favoriteMovies.count)
         }
         
         addToFavotrite.backgroundColor = .red
         return addToFavotrite
     }
 }
-
 //MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
     
@@ -78,37 +88,46 @@ extension HomeViewController: UITableViewDelegate {
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
         
+        
         navigationController?.pushViewController(detailVC, animated: true)
     }
-
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let addToFavorite = self.addToFavorite(rowIndexPath: indexPath)
         let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
         return swipe
     }
-    
-    
 }
-
 //MARK: -UITAbleViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        if selectedIndex == 0 {
-            return 100
-        } else if selectedIndex == 1 {
-            return 1
-        }else if selectedIndex == 2 {
-            return 4
+        switch selectedSection {
+        case 0:
+            return MovieManager.shared.popularMovies.count
+        case 1:
+            return MovieManager.shared.topRatedMovies.count
+        case 2:
+            return MovieManager.shared.upcommingMovies.count
+        default:
+            return 0
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
     return UITableViewCell() }
-        
+
+        switch selectedSection {
+        case 0:
+            cell.setUpUI(model: MovieManager.shared.popularMovies[indexPath.row])
+        case 1:
+            cell.setUpUI(model: MovieManager.shared.topRatedMovies[indexPath.row])
+        case 2:
+            cell.setUpUI(model: MovieManager.shared.upcommingMovies[indexPath.row])
+        default:
+            break
+        }
         return cell
     }
 }
@@ -117,6 +136,12 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        var movieArray = [Movie]()
         searchBar.resignFirstResponder()
+        NetworkManager.shared.getSearchResults(searchTerm: searchBar.text ?? "") { (movie) in
+            movieArray = movie
+            print(movieArray)
+        }
     }
 }
