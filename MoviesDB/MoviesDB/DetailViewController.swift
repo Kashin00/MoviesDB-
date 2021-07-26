@@ -10,6 +10,10 @@ import SDWebImage
 
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var durationLable: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    
+    
     @IBOutlet weak var detailView: DetailView!
     var movie: Movie?
     
@@ -21,8 +25,14 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController {
+    
     func setUp() {
         guard let movie = movie else { return }
         detailView.setUpView(movie: movie)
+    }
+    
+    func setUpAllInfo (){
+        
+        
     }
 }

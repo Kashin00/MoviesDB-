@@ -33,7 +33,6 @@ class DetailView: UIView {
         }
         nameLabel.text = movie.title
         descriptionTextView.text = movie.overview
-//        posterImageView.image = movieImage
     }
 
     
