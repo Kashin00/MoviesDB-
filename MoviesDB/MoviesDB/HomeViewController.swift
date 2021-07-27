@@ -15,10 +15,10 @@ class HomeViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpUI()
     }
     
@@ -57,33 +57,6 @@ private extension HomeViewController {
         }
         filmsTableView.reloadData()
     }
-    
-    //MARK: -Add to favorite swipe
-     func addToFavorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
-        let addToFavotrite = UIContextualAction(style: .destructive, title: "🤍") { (_, _, _) in
-                        
-            switch self.selectedSection {
-            case 0:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.popularMovies[indexPath.row]) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
-                }
-            case 1:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.topRatedMovies[indexPath.row]) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
-                }
-            case 2:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.upcommingMovies[indexPath.row]) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
-                }
-            default:
-                break
-            }
-            print( MovieManager.shared.favoriteMovies.count)
-        }
-        
-        addToFavotrite.backgroundColor = .red
-        return addToFavotrite
-    }
 }
 //MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
@@ -108,11 +81,33 @@ extension HomeViewController: UITableViewDelegate {
         }
         navigationController?.pushViewController(detailVC, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let addToFavorite = self.addToFavorite(rowIndexPath: indexPath)
-        let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
+        let delete = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
+            switch self.selectedSection {
+            case 0:
+                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.popularMovies[indexPath.row]) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
+                }
+            case 1:
+                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.topRatedMovies[indexPath.row]) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
+                }
+            case 2:
+                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.upcommingMovies[indexPath.row]) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
+                }
+            default:
+                break
+            }
+            complitionHandler(true)
+        }
+        
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
         return swipe
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }
 //MARK: -UITAbleViewDataSource

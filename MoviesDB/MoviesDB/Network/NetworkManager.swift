@@ -119,7 +119,6 @@ class NetworkManager {
         let endUrl = searchTerm.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
         
         guard let url = URL(string: ApiType.search.path + endUrl) else { return }
-        print(url)
  
         let request = URLRequest(url: url)
         session.dataTask(with: request) { (data, responce, error) in

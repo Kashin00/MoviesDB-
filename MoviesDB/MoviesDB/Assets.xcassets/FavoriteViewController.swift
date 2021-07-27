@@ -13,18 +13,29 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak private var filmsTableView: UITableView!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
-    
+    private let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-//        filmsTableView.reloadData()
+
+        //MARK: -Refresh
+        refreshControl.tintColor = .white
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        filmsTableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filmsTableView.reloadData()
     }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        filmsTableView.reloadData()
+        refreshControl.endRefreshing()
+    }
 }
+
 
 extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

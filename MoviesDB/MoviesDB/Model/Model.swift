@@ -58,7 +58,7 @@ struct Movie: Decodable, Hashable, Equatable {
     
     init(from decoder: Decoder) throws {
         let movieContainer = try decoder.container(keyedBy: CodingKeys.self)
-        posterPath = try movieContainer.decode(String.self, forKey: .posterPath)
+        posterPath = try? movieContainer.decode(String.self, forKey: .posterPath)
         overview = try movieContainer.decode(String.self, forKey: .overview)
         releaseDate = try? movieContainer.decode(String.self, forKey: .releaseDate)
         genreIDS = try movieContainer.decode([Int].self, forKey: .genreIDS)

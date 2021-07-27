@@ -70,7 +70,7 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         
         NetworkManager.shared.getSearchResults(searchTerm: searchBar.text ?? "") { (movies) in
-            print(movies.count)
+
             self.movieArray = movies
             DispatchQueue.main.async {
                 self.filmsTableView.reloadData()
