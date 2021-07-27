@@ -28,10 +28,10 @@ class FavoriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filmsTableView.reloadData()
-
+        if !MovieManager.shared.favoriteMovies.isEmpty {
         MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
-        print(MovieManager.shared.favoriteMovies.count)
-    }
+        }
+        }
     
     @objc func refresh(_ sender: AnyObject) {
 

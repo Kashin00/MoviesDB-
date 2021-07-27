@@ -83,19 +83,25 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
+            
+            var titles = [String]()
+            MovieManager.shared.favoriteMovies.forEach{
+                titles.append($0.title)
+            }
+            
             switch self.selectedSection {
             case 0:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.popularMovies[indexPath.row]) {
+                if !titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
                     archivedData()
                 }
             case 1:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.topRatedMovies[indexPath.row]) {
+                if !titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
                     archivedData()
                 }
             case 2:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.upcommingMovies[indexPath.row]) {
+                if !titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
                     archivedData()
                 }
