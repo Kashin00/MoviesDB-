@@ -21,6 +21,11 @@ class HomeViewController: UIViewController {
 
         setUpUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        filmsTableView.reloadData()
+    }
 }
 
 //MARK: -SetUpUI func
@@ -133,19 +138,10 @@ extension HomeViewController: UITableViewDataSource {
         switch selectedSection {
         case 0:
             cell.setUpUI(model: MovieManager.shared.popularMovies[indexPath.row])
-            cell.imageSender = { image in
-                MovieManager.shared.popularMovies[indexPath.row].image = image
-            }
         case 1:
             cell.setUpUI(model: MovieManager.shared.topRatedMovies[indexPath.row])
-            cell.imageSender = { image in
-                MovieManager.shared.topRatedMovies[indexPath.row].image = image
-            }
         case 2:
             cell.setUpUI(model: MovieManager.shared.upcommingMovies[indexPath.row])
-            cell.imageSender = { image in
-                MovieManager.shared.upcommingMovies[indexPath.row].image = image
-            }
         default:
             break
         }

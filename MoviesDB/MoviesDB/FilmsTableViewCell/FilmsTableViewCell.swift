@@ -14,7 +14,6 @@ class FilmsTableViewCell: UITableViewCell {
     @IBOutlet weak private var nameLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak private var posterImageView: UIImageView!
-    var imageSender: ((UIImage) -> ())?
     
     public func setUpUI(model: Movie) {
 
@@ -22,6 +21,5 @@ class FilmsTableViewCell: UITableViewCell {
         infoLabel.text = model.overview
         let url = NetworkManager.shared.getImageURL(posterPath: model.posterPath ?? "")
         posterImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "unknown"), options: [], context: nil)
-        imageSender?(posterImageView.image ?? UIImage(named: "unknown")!)
     }
 }

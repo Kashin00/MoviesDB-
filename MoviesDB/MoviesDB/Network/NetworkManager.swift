@@ -52,7 +52,7 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     private init() {}
-    
+    weak var delegate:NetworkManagerDelegate?
     private let session = URLSession.shared
     
     func fetchPopularFilms (onCompletion: @escaping ([Movie]) -> ()) {
@@ -119,16 +119,19 @@ class NetworkManager {
         let endUrl = searchTerm.components(separatedBy: " ").filter { !$0.isEmpty }.joined(separator: "%20")
         
         guard let url = URL(string: ApiType.search.path + endUrl) else { return }
-        
+        print(url)
+ 
         let request = URLRequest(url: url)
-        
         session.dataTask(with: request) { (data, responce, error) in
             guard let data = data else { return print(error!) }
 
             do {
-                let movieData = try JSONDecoder().decode( MovieResponce.self, from: data)
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
                 onCompletion(movieData.movies)
             } catch {
+                DispatchQueue.main.async {
+                    self.delegate?.didFailToMakeResponse()
+                }
                 print(error)
             }
         }.resume()
@@ -138,8 +141,9 @@ class NetworkManager {
         
         guard let url = URL(string: ApiType.poster.path + posterPath) else { return URL(string: "")! }
         return url
-        
     }
 }
 
-
+protocol NetworkManagerDelegate: class {
+    func didFailToMakeResponse()
+}
