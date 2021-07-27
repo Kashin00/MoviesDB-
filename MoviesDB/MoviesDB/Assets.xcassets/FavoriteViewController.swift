@@ -54,6 +54,13 @@ extension FavoriteViewController: UITableViewDelegate {
         case .delete:
             MovieManager.shared.favoriteMovies.remove(at: indexPath.row)
             filmsTableView.deleteRows(at: [indexPath], with: .left)
+            print(MovieManager.shared.favoriteMovies.count)
+            do {
+                let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
+                UserDefaults.standard.set(encodeData, forKey: "items")
+            } catch {
+                print(error)
+            }
         default:
             break
         }
