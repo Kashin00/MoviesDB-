@@ -18,7 +18,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpUI()
     }
     
@@ -32,7 +31,7 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
     func setUpUI() {
         
-        let titles = ["Popular", "Top rated", "Upcomming"]
+        let titles = ["Popular", "Top rated", "Upcoming"]
         segmentControl = UISegmentedControl(items: titles)
         segmentControl.tintColor = UIColor.white
         segmentControl.backgroundColor = UIColor.gray
@@ -83,31 +82,39 @@ extension HomeViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
+        let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
             switch self.selectedSection {
             case 0:
                 if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.popularMovies[indexPath.row]) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
+                    archivedData()
                 }
             case 1:
                 if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.topRatedMovies[indexPath.row]) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
+                    archivedData()
                 }
             case 2:
                 if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.upcommingMovies[indexPath.row]) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
+                    archivedData()
                 }
             default:
                 break
             }
             complitionHandler(true)
         }
-        
-        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
         return swipe
     }
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+}
+
+func archivedData() {
+    do {
+        let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
+        UserDefaults.standard.set(encodeData, forKey: "items")
+    } catch {
+        print(error)
     }
 }
 //MARK: -UITAbleViewDataSource

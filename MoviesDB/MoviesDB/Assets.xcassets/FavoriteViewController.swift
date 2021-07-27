@@ -14,7 +14,7 @@ class FavoriteViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private let refreshControl = UIRefreshControl()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
@@ -28,14 +28,16 @@ class FavoriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filmsTableView.reloadData()
+
+        MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
+        print(MovieManager.shared.favoriteMovies.count)
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        filmsTableView.reloadData()
+
         refreshControl.endRefreshing()
     }
 }
-
 
 extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -52,7 +54,6 @@ extension FavoriteViewController: UITableViewDelegate {
         case .delete:
             MovieManager.shared.favoriteMovies.remove(at: indexPath.row)
             filmsTableView.deleteRows(at: [indexPath], with: .left)
-          
         default:
             break
         }
@@ -71,13 +72,12 @@ extension FavoriteViewController: UITableViewDelegate {
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MovieManager.shared.favoriteMovies.count
-    }
+        }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
             return UITableViewCell()
         }
-       
         cell.setUpUI(model: MovieManager.shared.favoriteMovies[indexPath.row])
         return cell
     }

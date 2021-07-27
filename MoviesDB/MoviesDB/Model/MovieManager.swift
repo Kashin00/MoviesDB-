@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MovieManager {
+final class MovieManager {
     
     static var shared = MovieManager()
 
