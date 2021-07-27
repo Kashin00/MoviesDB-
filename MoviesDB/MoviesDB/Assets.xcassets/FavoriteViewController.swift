@@ -18,7 +18,8 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-
+        MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
+        
         //MARK: -Refresh
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
@@ -29,12 +30,12 @@ class FavoriteViewController: UIViewController {
         super.viewWillAppear(animated)
         filmsTableView.reloadData()
         if !MovieManager.shared.favoriteMovies.isEmpty {
-        MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
+            MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
         }
-        }
+    }
     
     @objc func refresh(_ sender: AnyObject) {
-
+        
         refreshControl.endRefreshing()
     }
 }
@@ -70,7 +71,7 @@ extension FavoriteViewController: UITableViewDelegate {
         filmsTableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-
+        
         detailVC.movie = MovieManager.shared.favoriteMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -79,7 +80,7 @@ extension FavoriteViewController: UITableViewDelegate {
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MovieManager.shared.favoriteMovies.count
-        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
