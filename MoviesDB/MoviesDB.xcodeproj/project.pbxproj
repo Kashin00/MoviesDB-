@@ -25,6 +25,7 @@
 		BAB2491E26A8033F00744010 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB2491D26A8033F00744010 /* DetailView.xib */; };
 		BAB2492426A8064A00744010 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB2492326A8064A00744010 /* DetailView.swift */; };
 		BAB2494B26AAD25500744010 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BAB2494A26AAD25500744010 /* .gitignore */; };
+		BAB2495126AED7D100744010 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB2495026AED7D100744010 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		BAB2491D26A8033F00744010 /* DetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		BAB2492326A8064A00744010 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BAB2494A26AAD25500744010 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../../.gitignore; sourceTree = "<group>"; };
+		BAB2495026AED7D100744010 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		EA3FCE2430F4337B9D3147B2 /* Pods-MoviesDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesDB.release.xcconfig"; path = "Target Support Files/Pods-MoviesDB/Pods-MoviesDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				BA99013426A6F1BE00D040BA /* DiscoverViewController.swift */,
 				BA99013726A6F1D000D040BA /* FavoriteViewController.swift */,
 				BA99013A26A6F1DC00D040BA /* DetailViewController.swift */,
+				BAB2495026AED7D100744010 /* SearchViewController.swift */,
 				BA99011026A6E12800D040BA /* Main.storyboard */,
 				BAB2492026A8034500744010 /* DetailView */,
 				BAB2491726A70A3200744010 /* FilmsTableViewCell */,
@@ -279,6 +282,7 @@
 				BA99010F26A6E12800D040BA /* HomeViewController.swift in Sources */,
 				BAB2492426A8064A00744010 /* DetailView.swift in Sources */,
 				BA99010B26A6E12800D040BA /* AppDelegate.swift in Sources */,
+				BAB2495126AED7D100744010 /* SearchViewController.swift in Sources */,
 				BA99010D26A6E12800D040BA /* SceneDelegate.swift in Sources */,
 				BA99013B26A6F1DC00D040BA /* DetailViewController.swift in Sources */,
 				BA99013526A6F1BE00D040BA /* DiscoverViewController.swift in Sources */,
@@ -360,7 +364,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -415,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

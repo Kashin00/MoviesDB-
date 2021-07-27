@@ -15,11 +15,16 @@ class HomeViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUpUI()
+        sleep(1)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        filmsTableView.reloadData()
     }
 }
 
@@ -27,7 +32,7 @@ class HomeViewController: UIViewController {
 private extension HomeViewController {
     func setUpUI() {
         
-        let titles = ["Popular", "Top rated", "Upcomming"]
+        let titles = ["Popular", "Top rated", "Upcoming"]
         segmentControl = UISegmentedControl(items: titles)
         segmentControl.tintColor = UIColor.white
         segmentControl.backgroundColor = UIColor.gray
@@ -51,33 +56,6 @@ private extension HomeViewController {
             selectedSection = 2
         }
         filmsTableView.reloadData()
-    }
-    
-    //MARK: -Add to favorite swipe
-     func addToFavorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
-        let addToFavotrite = UIContextualAction(style: .destructive, title: "🤍") { (_, _, _) in
-                        
-            switch self.selectedSection {
-            case 0:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.popularMovies[indexPath.row]) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
-                }
-            case 1:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.topRatedMovies[indexPath.row]) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
-                }
-            case 2:
-                if !MovieManager.shared.favoriteMovies.contains(MovieManager.shared.upcommingMovies[indexPath.row]) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
-                }
-            default:
-                break
-            }
-            print( MovieManager.shared.favoriteMovies.count)
-        }
-        
-        addToFavotrite.backgroundColor = .red
-        return addToFavotrite
     }
 }
 //MARK: - UITableViewDelegate
@@ -103,11 +81,47 @@ extension HomeViewController: UITableViewDelegate {
         }
         navigationController?.pushViewController(detailVC, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let addToFavorite = self.addToFavorite(rowIndexPath: indexPath)
+        let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
+            
+            var titles = [String]()
+            MovieManager.shared.favoriteMovies.forEach{
+                titles.append($0.title)
+            }
+            
+            switch self.selectedSection {
+            case 0:
+                if !titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
+                    archivedData()
+                }
+            case 1:
+                if !titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
+                    archivedData()
+                }
+            case 2:
+                if !titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
+                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
+                    archivedData()
+                }
+            default:
+                break
+            }
+            complitionHandler(true)
+        }
         let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
         return swipe
+    }
+}
+
+func archivedData() {
+    do {
+        let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
+        UserDefaults.standard.set(encodeData, forKey: "items")
+    } catch {
+        print(error)
     }
 }
 //MARK: -UITAbleViewDataSource
@@ -133,19 +147,10 @@ extension HomeViewController: UITableViewDataSource {
         switch selectedSection {
         case 0:
             cell.setUpUI(model: MovieManager.shared.popularMovies[indexPath.row])
-            cell.imageSender = { image in
-                MovieManager.shared.popularMovies[indexPath.row].image = image
-            }
         case 1:
             cell.setUpUI(model: MovieManager.shared.topRatedMovies[indexPath.row])
-            cell.imageSender = { image in
-                MovieManager.shared.topRatedMovies[indexPath.row].image = image
-            }
         case 2:
             cell.setUpUI(model: MovieManager.shared.upcommingMovies[indexPath.row])
-            cell.imageSender = { image in
-                MovieManager.shared.upcommingMovies[indexPath.row].image = image
-            }
         default:
             break
         }

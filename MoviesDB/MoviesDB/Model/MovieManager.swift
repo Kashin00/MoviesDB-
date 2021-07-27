@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MovieManager {
+final class MovieManager {
     
     static var shared = MovieManager()
 
@@ -17,7 +17,6 @@ class MovieManager {
     var popularMovies = [Movie]()
     var randomMovies = [Movie]()
     var favoriteMovies = [Movie]()
-    var searchArray = [Movie]()
     
     private init() {
         NetworkManager.shared.fetchTopRatedFilms{ [self](movie) in
@@ -35,9 +34,4 @@ class MovieManager {
             self.randomMovies = movie
         }
     }
-    
-    func search (searchWord: String) {
-        NetworkManager.shared.getSearchResults(searchTerm: searchWord) { [self] (movies) in
-            self.searchArray = movies }
-        }
 }
