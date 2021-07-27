@@ -25,9 +25,8 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
-        
-        guard let movie = movie else { return }
-        setUpAllInfo(movie: movie)
+    
+        setUpAdditionalInfo()
     }
 }
 
@@ -38,13 +37,12 @@ extension DetailViewController {
         detailView.setUpView(movie: movie)
     }
     
-    func setUpAllInfo (movie: Movie){
+    func setUpAdditionalInfo () {
+        guard let movie = movie else { return }
         releaseDateLabel.text = String(movie.releaseDate ?? "")
         ratedLabel.text = String(movie.voteAverage)
         popularityLabel.text = String(Int( movie.popularity))
         originalLabel.text = movie.originalLanguage
-//        let movieEnumerated = movie.ganre.enumerated()
         ganreLable.text = movie.ganre.joined(separator: ", ")
-        
     }
 }

@@ -33,16 +33,22 @@ class DetailView: UIView {
         let url = NetworkManager.shared.getImageURL(posterPath: movie.posterPath ?? "")
         posterImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "unknown"), options: [], context: nil)
     }
+
+    func setUpForNoMovies(){
+        nameLabel.text = "Sorry, there is no movie right now"
+        descriptionTextView.text = "Try again latter"
+        posterImageView.image = UIImage(named: "unknown")
+    }
 }
 
 private extension DetailView {
-    
+
     func loadViewFromNib(nibName: String) -> UIView? {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
-    
+
     func configureView() {
         guard let view = self.loadViewFromNib(nibName: "DetailView") else {return}
         view.frame = self.bounds
