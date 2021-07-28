@@ -16,6 +16,8 @@ enum ApiType {
     case random
     case poster
     case search
+    case share
+   
     
     var apiKey: String {
         return "?api_key=a19c5b2987101c209439576411e5c98f"
@@ -36,6 +38,7 @@ enum ApiType {
         case .random: return  "trending/movie/week" + apiKey
         case .poster: return basePosterURL
         case .search: return  baseAPIURL + "search/movie" + apiKey + "&query="
+        case .share: return "https://www.themoviedb.org/movie/"
         }
     }
     
@@ -139,6 +142,11 @@ class NetworkManager {
     func getImageURL(posterPath: String) -> URL {
         
         guard let url = URL(string: ApiType.poster.path + posterPath) else { return URL(string: "")! }
+        return url
+    }
+    
+    func getURLForShare(id: Int) -> URL {
+        guard let url = URL(string: ApiType.share.path + String(id)) else { return URL(string: "")! }
         return url
     }
 }
