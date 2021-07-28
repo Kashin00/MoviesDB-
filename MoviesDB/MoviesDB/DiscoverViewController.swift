@@ -44,15 +44,17 @@ class DiscoverViewController: UIViewController {
    
     @IBAction func tapAddToFavoriteBurron(_ sender: UIButton) {
         guard let movie = movie else { return }
-        
-        var titles = [String]()
-        MovieManager.shared.favoriteMovies.forEach{
-            titles.append($0.title)
-        }
-
-        if !titles.contains(movie.title) {
+        if !UserDefaultsManager.shared.titles.contains(movie.title) {
             MovieManager.shared.favoriteMovies.append(movie)
-            archivedData()
+            UserDefaultsManager.shared.archivedData()
+        }else {
+            self.alertForAddToFavorite()
         }
+    }
+    
+    func alertForAddToFavorite() {
+        let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

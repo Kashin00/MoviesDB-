@@ -32,17 +32,12 @@ class DetailViewController: UIViewController {
     
     @IBAction func didTapAddToFavoriteVCButton(_ sender: UIButton) {
         sender.isSelected = true
-        
         guard let movie = movie else { return }
-        
-        var titles = [String]()
-        MovieManager.shared.favoriteMovies.forEach{
-            titles.append($0.title)
-        }
-
-        if !titles.contains(movie.title) {
+        if !UserDefaultsManager.shared.titles.contains(movie.title) {
             MovieManager.shared.favoriteMovies.append(movie)
-            archivedData()
+            UserDefaultsManager.shared.archivedData()
+        } else {
+            self.alertForAddToFavorite()
         }
     }
     
@@ -50,10 +45,9 @@ class DetailViewController: UIViewController {
         guard let movie = movie else { return }
        
         let item = [NetworkManager.shared.getURLForShare(id: movie.id)]
-        print(item)
         let activityController = UIActivityViewController(activityItems: item, applicationActivities: nil)
         self.present(activityController, animated: true, completion: nil)
-        }
+      }
 }
 
 extension DetailViewController {
@@ -77,7 +71,13 @@ extension DetailViewController {
         releaseDateLabel.text = String(movie.releaseDate ?? "")
         ratedLabel.text = String(movie.voteAverage)
         popularityLabel.text = String(Int( movie.popularity))
-        originalLabel.text = movie.originalLanguage
+        //originalLabel.text = movie.originalLanguage
         ganreLabel.text = movie.ganre.joined(separator: ", ")
+    }
+    
+    func alertForAddToFavorite() {
+        let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
