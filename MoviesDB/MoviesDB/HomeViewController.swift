@@ -15,7 +15,8 @@ class HomeViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
-    
+    private let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -45,17 +46,50 @@ private extension HomeViewController {
         segmentControl.addTarget(self, action: #selector(segmentTarget), for: .valueChanged)
         navigationItem.titleView = segmentControl
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+        
+        //MARK: -Refresh
+        refreshControl.tintColor = .white
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        filmsTableView.addSubview(refreshControl)
     }
     
     @objc func segmentTarget() {
-        if segmentControl.selectedSegmentIndex == 0 {
+        
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
             selectedSection = 0
-        }else if segmentControl.selectedSegmentIndex == 1 {
+        case 1:
             selectedSection = 1
-        }else if segmentControl.selectedSegmentIndex == 2 {
+        case 2:
             selectedSection = 2
+        default:
+            break
         }
         filmsTableView.reloadData()
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            NetworkManager.shared.fetchUpcomingFilms{ (movies) in
+                movies.forEach {
+                    print($0.title)
+                }
+                MovieManager.shared.popularMovies = movies
+                MovieManager.shared.popularMovies.forEach {
+                    print($0.title)
+                }
+            }
+        case 1:
+            selectedSection = 1
+        case 2:
+            selectedSection = 2
+        default:
+            break
+        }
+        filmsTableView.reloadData()
+        
+        refreshControl.endRefreshing()
     }
 }
 //MARK: - UITableViewDelegate
@@ -94,17 +128,22 @@ extension HomeViewController: UITableViewDelegate {
             case 0:
                 if !titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
-                    archivedData()
+                    UserDefaultsManager.shared.archivedData()
+//                    archivedData()
                 }
             case 1:
                 if !titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
-                    archivedData()
+//                    archivedData()
+                    UserDefaultsManager.shared.archivedData()
+
                 }
             case 2:
                 if !titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
-                    archivedData()
+//                    archivedData()
+                    UserDefaultsManager.shared.archivedData()
+
                 }
             default:
                 break
