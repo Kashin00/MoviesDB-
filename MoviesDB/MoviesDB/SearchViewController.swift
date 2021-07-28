@@ -81,8 +81,8 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: NetworkManagerDelegate {
     func didFailToMakeResponse() {
-        let alert = UIAlertController(title: "There are no films with that name", message: "Please, enter the correct name", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        let alert = UIAlertController(title: UserMessages.noFilmWithName, message: UserMessages.correctName, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }

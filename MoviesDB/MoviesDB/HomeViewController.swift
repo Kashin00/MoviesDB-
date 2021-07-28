@@ -53,6 +53,12 @@ private extension HomeViewController {
         filmsTableView.addSubview(refreshControl)
     }
     
+    func alertForAddToFavorite() {
+        let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc func segmentTarget() {
         
         switch segmentControl.selectedSegmentIndex {
@@ -130,20 +136,24 @@ extension HomeViewController: UITableViewDelegate {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
 //                    archivedData()
+                } else {
+                    self.alertForAddToFavorite()
                 }
             case 1:
                 if !titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
 //                    archivedData()
                     UserDefaultsManager.shared.archivedData()
-
+                }else {
+                    self.alertForAddToFavorite()
                 }
             case 2:
                 if !titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
 //                    archivedData()
                     UserDefaultsManager.shared.archivedData()
-
+                }else {
+                    self.alertForAddToFavorite()
                 }
             default:
                 break
