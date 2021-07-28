@@ -56,7 +56,6 @@ extension FavoriteViewController: UITableViewDelegate {
         filmsTableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-        
         detailVC.movie = MovieManager.shared.favoriteMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }

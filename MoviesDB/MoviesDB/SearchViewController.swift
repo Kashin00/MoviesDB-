@@ -21,9 +21,10 @@ class SearchViewController: UIViewController {
         NetworkManager.shared.delegate = self
         searchBar.becomeFirstResponder()
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        
     }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -42,6 +43,7 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         filmsTableView.deselectRow(at: indexPath, animated: true)
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
+        
         detailVC.movie = MovieManager.shared.searchMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -81,12 +83,18 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        
-        NetworkManager.shared.getSearchResults(searchTerm: searchBar.text ?? "") { (movies) in
+  
+        if self.searchBar.text == "" {
+            MovieManager.shared.searchMovies.removeAll()
+            self.filmsTableView.reloadData()
+        } else {
             
-            MovieManager.shared.searchMovies = movies
-            DispatchQueue.main.async {
-                self.filmsTableView.reloadData()
+            NetworkManager.shared.getSearchResults(searchTerm: searchBar.text ?? "") { (movies) in
+                
+                MovieManager.shared.searchMovies = movies
+                DispatchQueue.main.async {
+                    self.filmsTableView.reloadData()
+                }
             }
         }
     }
