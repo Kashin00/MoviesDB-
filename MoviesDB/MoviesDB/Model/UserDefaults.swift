@@ -10,11 +10,6 @@ import Foundation
 class UserDefaultsManager {
     
     static var shared = UserDefaultsManager()
-    
-//    var titles = [String]()
-//    MovieManager.shared.favoriteMovies.forEach{
-//        titles.append($0.title)
-//    }
   
     var titles: [String] {
         var titles = [String]()

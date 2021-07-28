@@ -15,8 +15,8 @@ class HomeViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
-    private let refreshControl = UIRefreshControl()
-
+    private let pullToRefreshIndicator = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -48,9 +48,9 @@ private extension HomeViewController {
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         
         //MARK: -Refresh
-        refreshControl.tintColor = .white
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        filmsTableView.addSubview(refreshControl)
+        pullToRefreshIndicator.tintColor = .white
+        pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        filmsTableView.addSubview(pullToRefreshIndicator)
     }
     
     func alertForAddToFavorite() {
@@ -76,26 +76,27 @@ private extension HomeViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         switch segmentControl.selectedSegmentIndex {
+
         case 0:
-            NetworkManager.shared.fetchUpcomingFilms{ (movies) in
-                movies.forEach {
-                    print($0.title)
-                }
+            NetworkManager.shared.fetchPopularFilms{ (movies) in
                 MovieManager.shared.popularMovies = movies
-                MovieManager.shared.popularMovies.forEach {
-                    print($0.title)
-                }
             }
         case 1:
-            selectedSection = 1
+            NetworkManager.shared.fetchTopRatedFilms { (movies) in
+                MovieManager.shared.topRatedMovies = movies
+            }
         case 2:
-            selectedSection = 2
-        default:
+            NetworkManager.shared.fetchUpcomingFilms { (movies) in
+                MovieManager.shared.upcommingMovies = movies
+            }        default:
             break
         }
+        self.perform(#selector(end), with: nil, afterDelay: 1)
+
+    }
+    @objc func end() {
         filmsTableView.reloadData()
-        
-        refreshControl.endRefreshing()
+        pullToRefreshIndicator.endRefreshing()
     }
 }
 //MARK: - UITableViewDelegate
