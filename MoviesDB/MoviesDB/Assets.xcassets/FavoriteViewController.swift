@@ -17,7 +17,6 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-//        MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
         UserDefaultsManager.shared.unArchivedData()
     }
     
@@ -25,7 +24,6 @@ class FavoriteViewController: UIViewController {
         super.viewWillAppear(animated)
         filmsTableView.reloadData()
         if !MovieManager.shared.favoriteMovies.isEmpty {
-//            MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
             UserDefaultsManager.shared.unArchivedData()
 
         }
@@ -49,12 +47,6 @@ extension FavoriteViewController: UITableViewDelegate {
             filmsTableView.deleteRows(at: [indexPath], with: .left)
     
             UserDefaultsManager.shared.archivedData()
-//            do {
-//                let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
-//                UserDefaults.standard.set(encodeData, forKey: "items")
-//            } catch {
-//                print(error)
-//            }
         default:
             break
         }

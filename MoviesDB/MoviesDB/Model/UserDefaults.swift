@@ -11,7 +11,21 @@ class UserDefaultsManager {
     
     static var shared = UserDefaultsManager()
     
+//    var titles = [String]()
+//    MovieManager.shared.favoriteMovies.forEach{
+//        titles.append($0.title)
+//    }
+  
+    var titles: [String] {
+        var titles = [String]()
+        MovieManager.shared.favoriteMovies.forEach{
+            titles.append($0.title)
+        }
+        
+        return titles
+    }
     func archivedData() {
+        
         do {
             let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
             UserDefaults.standard.set(encodeData, forKey: "items")

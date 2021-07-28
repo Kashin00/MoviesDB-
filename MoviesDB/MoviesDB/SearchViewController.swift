@@ -12,7 +12,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak private var searchBar: UISearchBar!
     @IBOutlet weak private var filmsTableView: UITableView!
     private let heightForRow = CGFloat(100)
-    private var movieArray = [Movie]()
     private let cell = String(describing: FilmsTableViewCell.self)
     
     override func viewDidLoad() {
@@ -20,13 +19,18 @@ class SearchViewController: UIViewController {
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         searchBar.delegate = self
         NetworkManager.shared.delegate = self
+        searchBar.becomeFirstResponder()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
     }
-    func addToFavorite(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
-        let addToFavotrite = UIContextualAction(style: .destructive, title: "🤍") { (_, _, _) in
-            MovieManager.shared.favoriteMovies.append(self.movieArray[indexPath.row])
-        }
-        addToFavotrite.backgroundColor = .red
-        return addToFavotrite
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    func alertForAddToFavorite() {
+        let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -38,12 +42,21 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         filmsTableView.deselectRow(at: indexPath, animated: true)
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-        detailVC.movie = movieArray[indexPath.row]
+        detailVC.movie = MovieManager.shared.searchMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let addToFavorite = self.addToFavorite(rowIndexPath: indexPath)
+        let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
+            
+            if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.searchMovies[indexPath.row].title) {
+                MovieManager.shared.favoriteMovies.append(MovieManager.shared.searchMovies[indexPath.row])
+                UserDefaultsManager.shared.archivedData()
+            } else {
+                self.alertForAddToFavorite()
+            }
+            complitionHandler(true)
+        }
         let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
         return swipe
     }
@@ -51,7 +64,7 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieArray.count
+        return MovieManager.shared.searchMovies.count
     }
     
     
@@ -59,7 +72,7 @@ extension SearchViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
             return UITableViewCell() }
         
-        cell.setUpUI(model: movieArray[indexPath.row])
+        cell.setUpUI(model: MovieManager.shared.searchMovies[indexPath.row])
         return cell
     }
 }
@@ -70,8 +83,8 @@ extension SearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         
         NetworkManager.shared.getSearchResults(searchTerm: searchBar.text ?? "") { (movies) in
-
-            self.movieArray = movies
+            
+            MovieManager.shared.searchMovies = movies
             DispatchQueue.main.async {
                 self.filmsTableView.reloadData()
             }

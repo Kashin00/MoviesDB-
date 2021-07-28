@@ -124,33 +124,25 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
-            
-            var titles = [String]()
-            MovieManager.shared.favoriteMovies.forEach{
-                titles.append($0.title)
-            }
-            
+           
             switch self.selectedSection {
             case 0:
-                if !titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
+                if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
-//                    archivedData()
                 } else {
                     self.alertForAddToFavorite()
                 }
             case 1:
-                if !titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
+                if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
-//                    archivedData()
                     UserDefaultsManager.shared.archivedData()
                 }else {
                     self.alertForAddToFavorite()
                 }
             case 2:
-                if !titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
+                if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
-//                    archivedData()
                     UserDefaultsManager.shared.archivedData()
                 }else {
                     self.alertForAddToFavorite()
@@ -165,14 +157,6 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-func archivedData() {
-    do {
-        let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
-        UserDefaults.standard.set(encodeData, forKey: "items")
-    } catch {
-        print(error)
-    }
-}
 //MARK: -UITAbleViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
