@@ -55,13 +55,4 @@ class DiscoverViewController: UIViewController {
             archivedData()
         }
     }
-    
-    func archivedData() {
-        do {
-            let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
-            UserDefaults.standard.set(encodeData, forKey: "items")
-        } catch {
-            print(error)
-        }
-}
 }
