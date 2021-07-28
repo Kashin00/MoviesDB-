@@ -112,6 +112,7 @@ final class Movie: NSObject, Decodable, NSCoding {
         voteAverage = coder.decodeObject(forKey: CodingKeys.voteAverage.rawValue) as? Double ?? 0.0
         ganre = coder.decodeObject(forKey: CodingKeys.ganre.rawValue) as? [String] ?? []
         image = coder.decodeObject(forKey: CodingKeys.image.rawValue) as? UIImage
+        originalLanguage = coder.decodeObject(forKey: CodingKeys.originalLanguage.rawValue) as? String ?? ""
     }
 }
 // MARK: - Genre

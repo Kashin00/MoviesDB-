@@ -44,9 +44,24 @@ class DiscoverViewController: UIViewController {
    
     @IBAction func tapAddToFavoriteBurron(_ sender: UIButton) {
         guard let movie = movie else { return }
+        
+        var titles = [String]()
+        MovieManager.shared.favoriteMovies.forEach{
+            titles.append($0.title)
+        }
 
-        if !MovieManager.shared.favoriteMovies.contains(movie) {
+        if !titles.contains(movie.title) {
             MovieManager.shared.favoriteMovies.append(movie)
+            archivedData()
         }
     }
+    
+    func archivedData() {
+        do {
+            let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
+            UserDefaults.standard.set(encodeData, forKey: "items")
+        } catch {
+            print(error)
+        }
+}
 }
