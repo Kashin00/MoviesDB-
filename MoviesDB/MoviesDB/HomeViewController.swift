@@ -74,17 +74,11 @@ private extension HomeViewController {
         
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            NetworkManager.shared.fetchPopularFilms{ (movies) in
-                MovieManager.shared.popularMovies = movies
-            }
+            MovieManager.shared.popularMovies.shuffle()
         case 1:
-            NetworkManager.shared.fetchTopRatedFilms { (movies) in
-                MovieManager.shared.topRatedMovies = movies
-            }
+            MovieManager.shared.topRatedMovies.shuffle()
         case 2:
-            NetworkManager.shared.fetchUpcomingFilms { (movies) in
-                MovieManager.shared.upcommingMovies = movies
-            }
+            MovieManager.shared.upcommingMovies.shuffle()
         default:
             break
         }

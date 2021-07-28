@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class Movie: NSObject, Decodable, NSCoding {
-    
+
     let posterPath: String?
     let overview: String
     let releaseDate: String?
