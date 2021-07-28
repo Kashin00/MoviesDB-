@@ -15,16 +15,12 @@ class HomeViewController: UIViewController {
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
+    private let pullToRefreshIndicator = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        sleep(1)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        filmsTableView.reloadData()
+
     }
 }
 
@@ -45,17 +41,58 @@ private extension HomeViewController {
         segmentControl.addTarget(self, action: #selector(segmentTarget), for: .valueChanged)
         navigationItem.titleView = segmentControl
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+        
+        //MARK: -Refresh
+        pullToRefreshIndicator.tintColor = .white
+        pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        filmsTableView.addSubview(pullToRefreshIndicator)
+        sleep(1)
+    }
+
+    func alertForAddToFavorite() {
+        let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func segmentTarget() {
-        if segmentControl.selectedSegmentIndex == 0 {
+        
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
             selectedSection = 0
-        }else if segmentControl.selectedSegmentIndex == 1 {
+        case 1:
             selectedSection = 1
-        }else if segmentControl.selectedSegmentIndex == 2 {
+        case 2:
             selectedSection = 2
+        default:
+            break
         }
         filmsTableView.reloadData()
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            NetworkManager.shared.fetchPopularFilms{ (movies) in
+                MovieManager.shared.popularMovies = movies
+            }
+        case 1:
+            NetworkManager.shared.fetchTopRatedFilms { (movies) in
+                MovieManager.shared.topRatedMovies = movies
+            }
+        case 2:
+            NetworkManager.shared.fetchUpcomingFilms { (movies) in
+                MovieManager.shared.upcommingMovies = movies
+            }
+        default:
+            break
+        }
+        self.perform(#selector(endRefreshing), with: nil, afterDelay: 1)
+    }
+    @objc func endRefreshing() {
+        filmsTableView.reloadData()
+        pullToRefreshIndicator.endRefreshing()
     }
 }
 //MARK: - UITableViewDelegate
@@ -84,27 +121,28 @@ extension HomeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
-            
-            var titles = [String]()
-            MovieManager.shared.favoriteMovies.forEach{
-                titles.append($0.title)
-            }
-            
+           
             switch self.selectedSection {
             case 0:
-                if !titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
+                if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
-                    archivedData()
+                    UserDefaultsManager.shared.archivedData()
+                } else {
+                    self.alertForAddToFavorite()
                 }
             case 1:
-                if !titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
+                if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
-                    archivedData()
+                    UserDefaultsManager.shared.archivedData()
+                }else {
+                    self.alertForAddToFavorite()
                 }
             case 2:
-                if !titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
+                if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
-                    archivedData()
+                    UserDefaultsManager.shared.archivedData()
+                }else {
+                    self.alertForAddToFavorite()
                 }
             default:
                 break
@@ -116,14 +154,6 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-func archivedData() {
-    do {
-        let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
-        UserDefaults.standard.set(encodeData, forKey: "items")
-    } catch {
-        print(error)
-    }
-}
 //MARK: -UITAbleViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

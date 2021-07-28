@@ -13,30 +13,19 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak private var filmsTableView: UITableView!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRow = CGFloat(100)
-    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-        MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
-        
-        //MARK: -Refresh
-        refreshControl.tintColor = .white
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        filmsTableView.addSubview(refreshControl)
+        UserDefaultsManager.shared.unArchivedData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filmsTableView.reloadData()
         if !MovieManager.shared.favoriteMovies.isEmpty {
-            MovieManager.shared.favoriteMovies = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(UserDefaults.standard.object(forKey: "items") as! Data) as! [Movie]
+            UserDefaultsManager.shared.unArchivedData()
         }
-    }
-    
-    @objc func refresh(_ sender: AnyObject) {
-        
-        refreshControl.endRefreshing()
     }
 }
 
@@ -55,13 +44,8 @@ extension FavoriteViewController: UITableViewDelegate {
         case .delete:
             MovieManager.shared.favoriteMovies.remove(at: indexPath.row)
             filmsTableView.deleteRows(at: [indexPath], with: .left)
-            print(MovieManager.shared.favoriteMovies.count)
-            do {
-                let encodeData = try NSKeyedArchiver.archivedData(withRootObject: MovieManager.shared.favoriteMovies, requiringSecureCoding: false)
-                UserDefaults.standard.set(encodeData, forKey: "items")
-            } catch {
-                print(error)
-            }
+    
+            UserDefaultsManager.shared.archivedData()
         default:
             break
         }
@@ -71,7 +55,6 @@ extension FavoriteViewController: UITableViewDelegate {
         filmsTableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-        
         detailVC.movie = MovieManager.shared.favoriteMovies[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
