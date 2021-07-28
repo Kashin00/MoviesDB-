@@ -25,7 +25,6 @@ class FavoriteViewController: UIViewController {
         filmsTableView.reloadData()
         if !MovieManager.shared.favoriteMovies.isEmpty {
             UserDefaultsManager.shared.unArchivedData()
-
         }
     }
 }

@@ -20,12 +20,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        sleep(1)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        filmsTableView.reloadData()
+
     }
 }
 
@@ -51,8 +46,9 @@ private extension HomeViewController {
         pullToRefreshIndicator.tintColor = .white
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
+        sleep(1)
     }
-    
+
     func alertForAddToFavorite() {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
@@ -75,8 +71,8 @@ private extension HomeViewController {
     }
     
     @objc func refresh(_ sender: AnyObject) {
+        
         switch segmentControl.selectedSegmentIndex {
-
         case 0:
             NetworkManager.shared.fetchPopularFilms{ (movies) in
                 MovieManager.shared.popularMovies = movies
@@ -88,13 +84,13 @@ private extension HomeViewController {
         case 2:
             NetworkManager.shared.fetchUpcomingFilms { (movies) in
                 MovieManager.shared.upcommingMovies = movies
-            }        default:
+            }
+        default:
             break
         }
-        self.perform(#selector(end), with: nil, afterDelay: 1)
-
+        self.perform(#selector(endRefreshing), with: nil, afterDelay: 1)
     }
-    @objc func end() {
+    @objc func endRefreshing() {
         filmsTableView.reloadData()
         pullToRefreshIndicator.endRefreshing()
     }
