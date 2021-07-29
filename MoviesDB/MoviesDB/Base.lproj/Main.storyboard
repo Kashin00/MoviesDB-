@@ -343,7 +343,7 @@
                                                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bLp-yf-IJn">
                                                                 <rect key="frame" x="0.0" y="143.5" width="384" height="44.5"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPo-BG-q6y">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People Appreciated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPo-BG-q6y">
                                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="21.5"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -415,7 +415,7 @@
                         <outlet property="addToFavoriteButton" destination="lPc-Lt-LiM" id="qIj-HM-1cs"/>
                         <outlet property="detailView" destination="jKx-Id-ZWX" id="Swr-11-5M0"/>
                         <outlet property="ganreLabel" destination="0U0-m5-3Yu" id="rvQ-QN-X3H"/>
-                        <outlet property="originalLabel" destination="jkG-8O-RiH" id="MC6-VI-Shg"/>
+                        <outlet property="peopleAppreciatedLabel" destination="jkG-8O-RiH" id="MC6-VI-Shg"/>
                         <outlet property="popularityLabel" destination="WAk-Ts-mND" id="iWa-Hw-97T"/>
                         <outlet property="ratedLabel" destination="Ami-5V-hAJ" id="jg3-0a-S0o"/>
                         <outlet property="releaseDateLabel" destination="daO-i1-TuU" id="cdN-1D-fAb"/>

@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var ratedLabel: UILabel!
     @IBOutlet weak var ganreLabel: UILabel!
     @IBOutlet weak var popularityLabel: UILabel!
-    @IBOutlet weak var originalLabel: UILabel!
+    @IBOutlet weak var peopleAppreciatedLabel: UILabel!
     @IBOutlet weak var addToFavoriteButton: UIButton!
     
     
@@ -73,7 +73,7 @@ extension DetailViewController {
         releaseDateLabel.text = String(movie.releaseDate ?? "")
         ratedLabel.text = String(movie.voteAverage)
         popularityLabel.text = String(Int( movie.popularity))
-        originalLabel.text = String(movie.voteCount)
+        peopleAppreciatedLabel.text = String(movie.voteCount)
         ganreLabel.text = movie.ganre.joined(separator: ", ")
     }
     
