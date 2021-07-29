@@ -7,5 +7,5 @@ target 'MoviesDB' do
 
   # Pods for MoviesDB
 pod 'SDWebImage', '~> 5.0'
-
+pod 'SideMenu'
 end
