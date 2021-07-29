@@ -44,7 +44,10 @@ class MenuTableViewController: UITableViewController {
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let genreVC = storyboard.instantiateViewController(withIdentifier: "FilmsByGenreViewController") as? FilmsByGenreViewController {
-            sleep(1)
+            while array.isEmpty {
+                print("e")
+                sleep(1/2)
+            }
             genreVC.movie = array
             navigationController?.pushViewController(genreVC, animated: true)
         }

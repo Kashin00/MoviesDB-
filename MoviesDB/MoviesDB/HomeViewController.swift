@@ -25,6 +25,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        while MovieManager.shared.popularMovies.isEmpty {
+            sleep(1/2)
+        }
             self.setUpUI()
             self.createSideMenu()
     }
