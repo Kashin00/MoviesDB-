@@ -184,20 +184,21 @@ extension HomeViewController: UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+
         switch selectedSection {
         case 0:
             if currentPage < totalPages && indexPath.row == MovieManager.shared.popularMovies.count - 1 {
                 currentPage = currentPage + 1
                 DispatchQueue.main.async { [self] in
-                MovieManager.shared.loadMoreFilms(page: self.currentPage)
+                    MovieManager.shared.loadMoreFilms(page: self.currentPage)
                 }
             }
-            self.perform(#selector(reloadtableView), with: nil, afterDelay: 0)
+            self.perform(#selector(reloadtableView), with: nil, afterDelay: 1)
         default:
             break
         }
     }
+
     @objc func reloadtableView(){
         self.filmsTableView.reloadData()
     }

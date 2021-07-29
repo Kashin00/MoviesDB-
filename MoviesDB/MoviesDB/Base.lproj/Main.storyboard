@@ -118,14 +118,14 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="jaI-hR-gJd">
-                                        <rect key="frame" x="0.0" y="0.0" width="410" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="410" height="643.5"/>
                                         <subviews>
                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-GF-fwQ" customClass="DetailView" customModule="MoviesDB" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="0.0" width="370" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <rect key="frame" x="20" y="0.0" width="370" height="593.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="170" translatesAutoresizingMaskIntoConstraints="NO" id="icW-iL-AoP">
-                                                <rect key="frame" x="89" y="70" width="232" height="30"/>
+                                                <rect key="frame" x="89" y="613.5" width="232" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ge1-zS-ZBe">
                                                         <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
@@ -152,11 +152,13 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Ltj-v8-uj2"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="5ip-GF-fwQ" secondAttribute="trailing" constant="20" id="J1g-Pk-PxR"/>
                                             <constraint firstItem="5ip-GF-fwQ" firstAttribute="leading" secondItem="jaI-hR-gJd" secondAttribute="leading" constant="20" id="RBl-9G-egO"/>
@@ -164,6 +166,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="jaI-hR-gJd" secondAttribute="bottom" id="BCo-JM-L6D"/>
                                     <constraint firstItem="jaI-hR-gJd" firstAttribute="top" secondItem="tI6-sP-C4S" secondAttribute="top" id="FPq-tr-rEH"/>
@@ -407,7 +410,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dNB-jH-2xO"/>
-                        <color key="backgroundColor" systemColor="labelColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8yt-4N-iEz" firstAttribute="trailing" secondItem="dNB-jH-2xO" secondAttribute="trailing" id="OyL-h4-bMS"/>
                             <constraint firstItem="8yt-4N-iEz" firstAttribute="bottom" secondItem="dNB-jH-2xO" secondAttribute="bottom" id="eUQ-Th-7Lo"/>

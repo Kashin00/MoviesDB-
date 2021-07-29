@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-//@IBDesignable
+@IBDesignable
 
 class DetailView: UIView {
     
