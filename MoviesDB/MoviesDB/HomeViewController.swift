@@ -18,8 +18,12 @@ class HomeViewController: UIViewController {
     private let pullToRefreshIndicator = UIRefreshControl()
     private var totalPages = 200
     private var currentPage = 1
+<<<<<<< HEAD
     private var menu:SideMenuNavigationController?
     
+=======
+    private var fetchingMore = false
+>>>>>>> develop
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -197,23 +201,33 @@ extension HomeViewController: UITableViewDataSource {
         }
         return cell
     }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        let contentHight = scrollView.contentSize.height
         
-        switch selectedSection {
-        case 0:
-            if currentPage < totalPages && indexPath.row == MovieManager.shared.popularMovies.count - 1 {
-                currentPage = currentPage + 1
-                DispatchQueue.main.async { [self] in
-                MovieManager.shared.loadMoreFilms(page: self.currentPage)
+        if offSetY > contentHight - scrollView.frame.height{
+            if !fetchingMore{
+                switch selectedSection {
+                case 0:
+                    fetchMorePopularMovies()
+                default:
+                    break
                 }
             }
-            self.perform(#selector(reloadtableView), with: nil, afterDelay: 0)
-        default:
-            break
         }
     }
-    @objc func reloadtableView(){
-        self.filmsTableView.reloadData()
+    
+    func fetchMorePopularMovies() {
+        fetchingMore = true
+        if currentPage < totalPages {
+            currentPage = currentPage + 1
+            DispatchQueue.main.async { [self] in
+                MovieManager.shared.loadMoreFilms(page: self.currentPage)
+                self.fetchingMore = false
+                self.filmsTableView.reloadData()
+            }
+        }
     }
 }
 
