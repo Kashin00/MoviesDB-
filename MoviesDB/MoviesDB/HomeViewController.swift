@@ -46,6 +46,10 @@ private extension HomeViewController {
         pullToRefreshIndicator.tintColor = .white
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
+        
+        MovieManager.shared.popularMovies.shuffle()
+        MovieManager.shared.topRatedMovies.shuffle()
+        MovieManager.shared.upcommingMovies.shuffle()
         sleep(1)
     }
 
@@ -71,7 +75,6 @@ private extension HomeViewController {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        
         switch segmentControl.selectedSegmentIndex {
         case 0:
             MovieManager.shared.popularMovies.shuffle()
