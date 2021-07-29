@@ -20,7 +20,6 @@ class MenuTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return Genre.ganresArray.count
     }
     
@@ -36,12 +35,14 @@ class MenuTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
+        func returnGenreID() -> Int {
+            return Genre.ganresArray[indexPath.row].id
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let genreVC = storyboard.instantiateViewController(withIdentifier: "FilmsByGenreViewController") as? FilmsByGenreViewController {
             genreVC.movie = MovieManager.shared.popularMovies
             navigationController?.pushViewController(genreVC, animated: true)
         }
-       
-        
     }
 }
