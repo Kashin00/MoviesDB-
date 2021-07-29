@@ -11,6 +11,7 @@
 		8436B47A26A73C7E00D3C543 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436B47926A73C7E00D3C543 /* NetworkManager.swift */; };
 		8436B48326A7665B00D3C543 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436B48226A7665B00D3C543 /* Movie.swift */; };
 		84A713BB26A9862700B58DD0 /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A713BA26A9862700B58DD0 /* MovieManager.swift */; };
+		BA33998E26B2E24F00C982C0 /* FilmsByGenreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33998D26B2E24F00C982C0 /* FilmsByGenreViewController.swift */; };
 		BA3EA20C26B13EE5006157B5 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EA20B26B13EE5006157B5 /* UserDefaults.swift */; };
 		BA3EA20F26B14DE6006157B5 /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EA20E26B14DE6006157B5 /* UserMessages.swift */; };
 		BA3EA21526B17ECA006157B5 /* MovieResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EA21426B17ECA006157B5 /* MovieResponce.swift */; };
@@ -39,6 +40,7 @@
 		8436B47926A73C7E00D3C543 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8436B48226A7665B00D3C543 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		84A713BA26A9862700B58DD0 /* MovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
+		BA33998D26B2E24F00C982C0 /* FilmsByGenreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsByGenreViewController.swift; sourceTree = "<group>"; };
 		BA3EA20B26B13EE5006157B5 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		BA3EA20E26B14DE6006157B5 /* UserMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
 		BA3EA21426B17ECA006157B5 /* MovieResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponce.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				BA99010C26A6E12800D040BA /* SceneDelegate.swift */,
 				BA99010E26A6E12800D040BA /* HomeViewController.swift */,
 				BA7DC38026B2DBED006B6BC3 /* MenuTableViewController.swift */,
+				BA33998D26B2E24F00C982C0 /* FilmsByGenreViewController.swift */,
 				BA99013426A6F1BE00D040BA /* DiscoverViewController.swift */,
 				BA99013726A6F1D000D040BA /* FavoriteViewController.swift */,
 				BA99013A26A6F1DC00D040BA /* DetailViewController.swift */,
@@ -295,6 +298,7 @@
 				8436B48326A7665B00D3C543 /* Movie.swift in Sources */,
 				BA3EA21526B17ECA006157B5 /* MovieResponce.swift in Sources */,
 				BA3EA20F26B14DE6006157B5 /* UserMessages.swift in Sources */,
+				BA33998E26B2E24F00C982C0 /* FilmsByGenreViewController.swift in Sources */,
 				8436B47A26A73C7E00D3C543 /* NetworkManager.swift in Sources */,
 				BA99010F26A6E12800D040BA /* HomeViewController.swift in Sources */,
 				BA3EA20C26B13EE5006157B5 /* UserDefaults.swift in Sources */,

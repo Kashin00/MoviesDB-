@@ -9,6 +9,40 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Films By Genre View Controller-->
+        <scene sceneID="7K6-XD-GJg">
+            <objects>
+                <viewController storyboardIdentifier="FilmsByGenreViewController" id="eUu-5k-x3R" customClass="FilmsByGenreViewController" customModule="MoviesDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pLa-jh-FlY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-Cb-lQY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="eUu-5k-x3R" id="b8v-Gc-hw5"/>
+                                    <outlet property="delegate" destination="eUu-5k-x3R" id="OPr-XA-hL7"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qqe-OX-U1u"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="vtE-Cb-lQY" firstAttribute="leading" secondItem="qqe-OX-U1u" secondAttribute="leading" id="FTh-jY-kxA"/>
+                            <constraint firstItem="qqe-OX-U1u" firstAttribute="bottom" secondItem="vtE-Cb-lQY" secondAttribute="bottom" id="H9d-4y-IZj"/>
+                            <constraint firstItem="qqe-OX-U1u" firstAttribute="trailing" secondItem="vtE-Cb-lQY" secondAttribute="trailing" id="P8q-Fy-aUo"/>
+                            <constraint firstItem="vtE-Cb-lQY" firstAttribute="top" secondItem="qqe-OX-U1u" secondAttribute="top" id="RAk-Lp-nxm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="filmsTableView" destination="vtE-Cb-lQY" id="KDZ-SE-TeX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mh8-n3-R8a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2268" y="1000"/>
+        </scene>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>

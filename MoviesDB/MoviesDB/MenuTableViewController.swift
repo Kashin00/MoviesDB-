@@ -12,7 +12,7 @@ class MenuTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .black
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: menuCell)
         navigationController?.navigationBar.barTintColor = .black
     }
@@ -35,5 +35,13 @@ class MenuTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let genreVC = storyboard.instantiateViewController(withIdentifier: "FilmsByGenreViewController") as? FilmsByGenreViewController {
+            genreVC.movie = MovieManager.shared.popularMovies
+            navigationController?.pushViewController(genreVC, animated: true)
+        }
+       
+        
     }
 }

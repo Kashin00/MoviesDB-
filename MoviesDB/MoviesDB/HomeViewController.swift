@@ -23,10 +23,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
-        menu?.leftSide = true
-        SideMenuManager.default.leftMenuNavigationController = menu
-        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+        createSideMenu()
     }
     @IBAction func didPressedSideMenu(_ sender: Any) {
         present(menu!, animated: true)
@@ -66,6 +63,13 @@ private extension HomeViewController {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func createSideMenu() {
+        menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
+        menu?.leftSide = true
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
     }
     
     @objc func segmentTarget() {
