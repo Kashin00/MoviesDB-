@@ -36,6 +36,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="PBs-it-7bz">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="line.horizontal.3" catalog="system" id="D3u-X4-V12">
+                            <connections>
+                                <action selector="didPressedSideMenu:" destination="BYZ-38-t0r" id="fpi-fG-pOx"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="wy9-ee-jMb">
                             <connections>
                                 <segue destination="Nwb-M0-9CM" kind="show" id="l7b-xt-rPf"/>
@@ -508,6 +513,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">

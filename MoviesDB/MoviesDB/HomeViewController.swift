@@ -7,7 +7,7 @@
 
 import UIKit
 import SDWebImage
-
+import SideMenu
 class HomeViewController: UIViewController {
     
     @IBOutlet weak private var filmsTableView: UITableView!
@@ -18,10 +18,20 @@ class HomeViewController: UIViewController {
     private let pullToRefreshIndicator = UIRefreshControl()
     private var totalPages = 200
     private var currentPage = 1
+    private var menu:SideMenuNavigationController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
+        menu?.leftSide = true
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
     }
+    @IBAction func didPressedSideMenu(_ sender: Any) {
+        present(menu!, animated: true)
+    }
+    
 }
 
 //MARK: -SetUpUI func

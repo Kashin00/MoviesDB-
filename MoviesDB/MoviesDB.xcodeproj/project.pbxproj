@@ -15,6 +15,7 @@
 		BA3EA20F26B14DE6006157B5 /* UserMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EA20E26B14DE6006157B5 /* UserMessages.swift */; };
 		BA3EA21526B17ECA006157B5 /* MovieResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EA21426B17ECA006157B5 /* MovieResponce.swift */; };
 		BA3EA21826B17EF8006157B5 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EA21726B17EF8006157B5 /* Genre.swift */; };
+		BA7DC38126B2DBED006B6BC3 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7DC38026B2DBED006B6BC3 /* MenuTableViewController.swift */; };
 		BA99010B26A6E12800D040BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99010A26A6E12800D040BA /* AppDelegate.swift */; };
 		BA99010D26A6E12800D040BA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99010C26A6E12800D040BA /* SceneDelegate.swift */; };
 		BA99010F26A6E12800D040BA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA99010E26A6E12800D040BA /* HomeViewController.swift */; };
@@ -42,6 +43,7 @@
 		BA3EA20E26B14DE6006157B5 /* UserMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessages.swift; sourceTree = "<group>"; };
 		BA3EA21426B17ECA006157B5 /* MovieResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponce.swift; sourceTree = "<group>"; };
 		BA3EA21726B17EF8006157B5 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		BA7DC38026B2DBED006B6BC3 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		BA99010726A6E12800D040BA /* MoviesDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99010A26A6E12800D040BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA99010C26A6E12800D040BA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				BA99010A26A6E12800D040BA /* AppDelegate.swift */,
 				BA99010C26A6E12800D040BA /* SceneDelegate.swift */,
 				BA99010E26A6E12800D040BA /* HomeViewController.swift */,
+				BA7DC38026B2DBED006B6BC3 /* MenuTableViewController.swift */,
 				BA99013426A6F1BE00D040BA /* DiscoverViewController.swift */,
 				BA99013726A6F1D000D040BA /* FavoriteViewController.swift */,
 				BA99013A26A6F1DC00D040BA /* DetailViewController.swift */,
@@ -299,6 +302,7 @@
 				BAB2492426A8064A00744010 /* DetailView.swift in Sources */,
 				BA99010B26A6E12800D040BA /* AppDelegate.swift in Sources */,
 				BAB2495126AED7D100744010 /* SearchViewController.swift in Sources */,
+				BA7DC38126B2DBED006B6BC3 /* MenuTableViewController.swift in Sources */,
 				BA99010D26A6E12800D040BA /* SceneDelegate.swift in Sources */,
 				BA99013B26A6F1DC00D040BA /* DetailViewController.swift in Sources */,
 				BA99013526A6F1BE00D040BA /* DiscoverViewController.swift in Sources */,
