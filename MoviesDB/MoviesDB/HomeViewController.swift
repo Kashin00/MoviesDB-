@@ -20,14 +20,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-
     }
 }
 
 //MARK: -SetUpUI func
 private extension HomeViewController {
     func setUpUI() {
-        
         let titles = ["Popular", "Top rated", "Upcoming"]
         segmentControl = UISegmentedControl(items: titles)
         segmentControl.tintColor = UIColor.white
@@ -46,11 +44,11 @@ private extension HomeViewController {
         pullToRefreshIndicator.tintColor = .white
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
-        
+        print(MovieManager.shared.popularMovies.count)
+        sleep(1)
         MovieManager.shared.popularMovies.shuffle()
         MovieManager.shared.topRatedMovies.shuffle()
         MovieManager.shared.upcommingMovies.shuffle()
-        sleep(1)
     }
 
     func alertForAddToFavorite() {
