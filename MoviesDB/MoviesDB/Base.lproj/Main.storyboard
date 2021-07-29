@@ -121,11 +121,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="410" height="100"/>
                                         <subviews>
                                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-GF-fwQ" customClass="DetailView" customModule="MoviesDB" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="0.0" width="350" height="50"/>
+                                                <rect key="frame" x="20" y="0.0" width="370" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="350" id="F6A-Ki-JUg"/>
-                                                </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="170" translatesAutoresizingMaskIntoConstraints="NO" id="icW-iL-AoP">
                                                 <rect key="frame" x="89" y="70" width="232" height="30"/>
@@ -161,6 +158,8 @@
                                             </stackView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="5ip-GF-fwQ" secondAttribute="trailing" constant="20" id="J1g-Pk-PxR"/>
+                                            <constraint firstItem="5ip-GF-fwQ" firstAttribute="leading" secondItem="jaI-hR-gJd" secondAttribute="leading" constant="20" id="RBl-9G-egO"/>
                                             <constraint firstItem="5ip-GF-fwQ" firstAttribute="centerX" secondItem="jaI-hR-gJd" secondAttribute="centerX" id="amL-gv-xvk"/>
                                         </constraints>
                                     </stackView>
