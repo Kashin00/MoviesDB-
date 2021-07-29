@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak private var filmsTableView: UITableView!
     private let heightForRow = CGFloat(100)
     private let cell = String(describing: FilmsTableViewCell.self)
+    private let pullToRefreshIndicator = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +21,14 @@ class SearchViewController: UIViewController {
         searchBar.delegate = self
         NetworkManager.shared.delegate = self
         searchBar.becomeFirstResponder()
+        searchBar.searchTextField.textColor = .white
+        searchBar.setPlaceholderText(color: .black)
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+        pullToRefreshIndicator.tintColor = .white
+        pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        filmsTableView.addSubview(pullToRefreshIndicator)
     }
     
     @objc func dismissKeyboard() {
@@ -32,6 +38,16 @@ class SearchViewController: UIViewController {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    @objc func refresh(_ sender: AnyObject) {
+        
+        MovieManager.shared.searchMovies.shuffle()
+        
+        self.perform(#selector(endRefreshing), with: nil, afterDelay: 1)
+    }
+    @objc func endRefreshing() {
+        filmsTableView.reloadData()
+        pullToRefreshIndicator.endRefreshing()
     }
 }
 
@@ -83,7 +99,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-  
+        
         if self.searchBar.text == "" {
             MovieManager.shared.searchMovies.removeAll()
             self.filmsTableView.reloadData()
@@ -105,5 +121,18 @@ extension SearchViewController: NetworkManagerDelegate {
         let alert = UIAlertController(title: UserMessages.noFilmWithName, message: UserMessages.correctName, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension UISearchBar {
+
+    func getTextField() -> UITextField? { return value(forKey: "searchField") as? UITextField }
+    func setPlaceholderText(color: UIColor) { getTextField()?.setPlaceholderText(color: color) }
+}
+
+extension UITextField {
+
+    func setPlaceholderText(color: UIColor) {
+        attributedPlaceholder = NSAttributedString(string: placeholder != nil ? placeholder! : "", attributes: [.foregroundColor: color])
     }
 }
