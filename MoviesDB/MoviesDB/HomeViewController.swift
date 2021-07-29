@@ -7,7 +7,7 @@
 
 import UIKit
 import SDWebImage
-
+import SideMenu
 class HomeViewController: UIViewController {
     
     @IBOutlet weak private var filmsTableView: UITableView!
@@ -19,10 +19,17 @@ class HomeViewController: UIViewController {
     private var totalPages = 200
     private var currentPage = 1
     private var fetchingMore = false
+    private var menu:SideMenuNavigationController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        createSideMenu()
     }
+    @IBAction func didPressedSideMenu(_ sender: Any) {
+        present(menu!, animated: true)
+    }
+    
 }
 
 //MARK: -SetUpUI func
@@ -57,6 +64,13 @@ private extension HomeViewController {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func createSideMenu() {
+        menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
+        menu?.leftSide = true
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
     }
     
     @objc func segmentTarget() {
