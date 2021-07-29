@@ -202,7 +202,6 @@ extension HomeViewController: UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offSetY = scrollView.contentOffset.y
         let contentHight = scrollView.contentSize.height
-        
         if offSetY > contentHight - scrollView.frame.height{
             if !fetchingMore{
                 switch selectedSection {
