@@ -256,3 +256,26 @@ MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage-umbrella.h
 MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage.debug.xcconfig
 MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage.modulemap
 MoviesDB/Pods/Target Support Files/SDWebImage/SDWebImage.release.xcconfig
+MoviesDB/Pods/SideMenu/LICENSE
+MoviesDB/Pods/SideMenu/README.md
+MoviesDB/Pods/SideMenu/Pod/Classes/Deprecations.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/Extensions.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/Initializable.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/Print.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/Protected.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuAnimationController.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuInteractionController.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuManager.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuNavigationController.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuPresentationController.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuPresentationStyle.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuPushCoordinator.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/SideMenuTransitionController.swift
+MoviesDB/Pods/SideMenu/Pod/Classes/UITableViewVibrantCell.swift
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu-dummy.m
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu-Info.plist
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu-prefix.pch
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu-umbrella.h
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu.debug.xcconfig
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu.modulemap
+MoviesDB/Pods/Target Support Files/SideMenu/SideMenu.release.xcconfig
