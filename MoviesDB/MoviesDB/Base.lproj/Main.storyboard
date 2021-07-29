@@ -133,8 +133,12 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ge1-zS-ZBe">
                                                         <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
                                                         <color key="tintColor" systemColor="systemRedColor"/>
-                                                        <state key="normal" image="heart.fill" catalog="system">
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                                        </state>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="tapAddToFavoriteBurron:" destination="tLY-ds-wSo" eventType="touchUpInside" id="MBM-Ak-XlD"/>
@@ -187,6 +191,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Random" id="N9D-46-WA2"/>
                     <connections>
+                        <outlet property="addToFavoriteLabel" destination="Ge1-zS-ZBe" id="LIN-Ek-fvN"/>
                         <outlet property="detailView" destination="5ip-GF-fwQ" id="ZuU-Qk-yA4"/>
                     </connections>
                 </viewController>
@@ -359,6 +364,9 @@
                                                                 <state key="normal">
                                                                     <color key="titleColor" systemColor="systemRedColor"/>
                                                                     <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <state key="disabled">
+                                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>

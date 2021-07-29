@@ -24,18 +24,20 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSharedMovieButton()
         setUp()
         setUpAdditionalInfo()
+        setSharedMovieButton()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        setStateConfigForAddToFavoriteButton()
     }
     
-    
     @IBAction func didTapAddToFavoriteVCButton(_ sender: UIButton) {
-        sender.isSelected = true
         guard let movie = movie else { return }
         if !UserDefaultsManager.shared.titles.contains(movie.title) {
             MovieManager.shared.favoriteMovies.append(movie)
             UserDefaultsManager.shared.archivedData()
+            sender.isSelected = true
         } else {
             self.alertForAddToFavorite()
         }
@@ -79,5 +81,14 @@ extension DetailViewController {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setStateConfigForAddToFavoriteButton() {
+        guard let movie = movie else { return }
+        if !UserDefaultsManager.shared.titles.contains(movie.title) {
+            addToFavoriteButton.isSelected = false
+        } else {
+            addToFavoriteButton.isSelected = true
+        }
     }
 }

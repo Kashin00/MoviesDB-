@@ -12,10 +12,12 @@ class DiscoverViewController: UIViewController {
     
     @IBOutlet weak var detailView: DetailView!
     
+    @IBOutlet weak var addToFavoriteLabel: UIButton!
     var movie: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +27,7 @@ class DiscoverViewController: UIViewController {
         let movies = MovieManager.shared.randomMovies
         let randomizeMovies = movies.shuffled()
         movie = randomizeMovies[0]
+        setStateConfigForAddToFavoriteButton()
         guard let movie = movie else { return }
         detailView.setUpView(movie: movie)
         }
@@ -37,6 +40,7 @@ class DiscoverViewController: UIViewController {
         let movies = MovieManager.shared.randomMovies
         let randomizeMovies = movies.shuffled()
         movie = randomizeMovies[0]
+        setStateConfigForAddToFavoriteButton()
         guard let movie = movie else { return }
         detailView.setUpView(movie: movie)
         }
@@ -47,6 +51,7 @@ class DiscoverViewController: UIViewController {
         if !UserDefaultsManager.shared.titles.contains(movie.title) {
             MovieManager.shared.favoriteMovies.append(movie)
             UserDefaultsManager.shared.archivedData()
+            sender.isSelected = true
         }else {
             self.alertForAddToFavorite()
         }
@@ -57,4 +62,13 @@ class DiscoverViewController: UIViewController {
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
+    func setStateConfigForAddToFavoriteButton() {
+        guard let movie = movie else { return }
+        if !UserDefaultsManager.shared.titles.contains(movie.title) {
+            addToFavoriteLabel.isSelected = false
+        } else {
+            addToFavoriteLabel.isSelected = true
+}
+}
 }
