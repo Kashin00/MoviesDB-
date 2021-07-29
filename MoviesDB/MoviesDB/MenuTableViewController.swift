@@ -35,36 +35,18 @@ class MenuTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let id = Genre.ganresArray[indexPath.row].id
-        var array = [Movie]()
-
-        let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=a19c5b2987101c209439576411e5c98f&with_genres=" + String(id))
-        getSearchResults(url: url!) { (movies) in
-            array = movies
+        let currentGenre = Genre.ganresArray[indexPath.row]
+        NetworkManager.shared.getSearchResults(id: currentGenre.id) { (movies) in
+            MovieManager.shared.genreArray = movies
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let genreVC = storyboard.instantiateViewController(withIdentifier: "FilmsByGenreViewController") as? FilmsByGenreViewController {
-            while array.isEmpty {
-                print("e")
-                sleep(1/2)
+            while MovieManager.shared.genreArray.isEmpty {
+                sleep(1/9)
             }
-            genreVC.movie = array
+            genreVC.getTitle = currentGenre.name
+            genreVC.movie = MovieManager.shared.genreArray
             navigationController?.pushViewController(genreVC, animated: true)
         }
-    }
-    
-    func getSearchResults (url: URL, onCompletion: @escaping ([Movie]) -> ()) {
- 
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { (data, responce, error) in
-            guard let data = data else { return print(error!) }
-
-            do {
-                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
-                onCompletion(movieData.movies)
-            } catch {
-                print(error)
-            }
-        }.resume()
     }
 }

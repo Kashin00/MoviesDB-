@@ -20,16 +20,16 @@ class HomeViewController: UIViewController {
     private var currentPage = 1
     private var menu:SideMenuNavigationController?
     private var fetchingMore = false
-    private var movieManager = MovieManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         while MovieManager.shared.popularMovies.isEmpty {
-            sleep(1/2)
+            sleep(1/9)
         }
-            self.setUpUI()
-            self.createSideMenu()
+        shuffle()
+        setUpUI()
+        createSideMenu()
     }
     @IBAction func didPressedSideMenu(_ sender: Any) {
         present(menu!, animated: true)
@@ -58,7 +58,7 @@ private extension HomeViewController {
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
     }
-
+    
     func alertForAddToFavorite() {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
@@ -72,9 +72,15 @@ private extension HomeViewController {
     }
     func createSideMenu() {
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
-       
+        
         SideMenuManager.default.leftMenuNavigationController = menu
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+    }
+    
+    func shuffle(){
+        MovieManager.shared.popularMovies.shuffle()
+        MovieManager.shared.topRatedMovies.shuffle()
+        MovieManager.shared.upcommingMovies.shuffle()
     }
     
     @objc func segmentTarget() {
@@ -133,10 +139,10 @@ extension HomeViewController: UITableViewDelegate {
         }
         navigationController?.pushViewController(detailVC, animated: true)
     }
-
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let addToFavorite = UIContextualAction(style: .normal, title: "❤️") { (action, view, complitionHandler) in
-           
+            
             switch self.selectedSection {
             case 0:
                 if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
@@ -175,7 +181,7 @@ extension HomeViewController: UITableViewDelegate {
 //MARK: -UITAbleViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         switch selectedSection {
         case 0:
             return MovieManager.shared.popularMovies.count
@@ -191,7 +197,7 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
-    return UITableViewCell() }
+            return UITableViewCell() }
         
         switch selectedSection {
         case 0:

@@ -85,7 +85,6 @@ extension SearchViewController: UITableViewDataSource {
         return MovieManager.shared.searchMovies.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
             return UITableViewCell() }

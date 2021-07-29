@@ -12,7 +12,7 @@ import SDWebImage
 class FilmsTableViewCell: UITableViewCell {
 
     @IBOutlet weak private var nameLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak private var infoLabel: UILabel!
     @IBOutlet weak private var posterImageView: UIImageView!
     
     public func setUpUI(model: Movie) {
