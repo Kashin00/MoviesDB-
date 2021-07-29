@@ -35,13 +35,18 @@ class MenuTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        func returnGenreID() -> Int {
-            return Genre.ganresArray[indexPath.row].id
+//        func returnGenreID() -> Int {
+//            return Genre.ganresArray[indexPath.row].id
+//        }
+        let id = Genre.ganresArray[indexPath.row].id
+        
+        DispatchQueue.main.async {
+        MovieManager.shared.loadByGenre(genre: id)
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let genreVC = storyboard.instantiateViewController(withIdentifier: "FilmsByGenreViewController") as? FilmsByGenreViewController {
-            genreVC.movie = MovieManager.shared.popularMovies
+            genreVC.movie = MovieManager.shared.moviesByGanre
             navigationController?.pushViewController(genreVC, animated: true)
         }
     }
