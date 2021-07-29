@@ -28,11 +28,17 @@ final class MovieManager {
             self.upcommingMovies = movie
         }
         
-        NetworkManager.shared.fetchPopularFilms{ [self](movie) in
+        NetworkManager.shared.fetchPopularFilms(page: 1) { [self](movie) in
             self.popularMovies = movie
         }
         NetworkManager.shared.getRandomFilms{ [self](movie) in
             self.randomMovies = movie
         }
     }
+        func loadMoreFilms (page: Int) {
+            NetworkManager.shared.fetchPopularFilms(page: page) { (movies) in
+                self.popularMovies.append(contentsOf: movies)
+            }
+
+        }
 }

@@ -16,7 +16,8 @@ class HomeViewController: UIViewController {
     private let heightForRow = CGFloat(100)
     private var selectedSection = 0
     private let pullToRefreshIndicator = UIRefreshControl()
-    
+    private var totalPages = 200
+    private var currentPage = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
@@ -166,6 +167,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath) as? FilmsTableViewCell else {
     return UITableViewCell() }
         
@@ -180,6 +182,24 @@ extension HomeViewController: UITableViewDataSource {
             break
         }
         return cell
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        switch selectedSection {
+        case 0:
+            if currentPage < totalPages && indexPath.row == MovieManager.shared.popularMovies.count - 1 {
+                currentPage = currentPage + 1
+                DispatchQueue.main.async { [self] in
+                MovieManager.shared.loadMoreFilms(page: self.currentPage)
+                }
+            }
+            self.perform(#selector(reloadtableView), with: nil, afterDelay: 0)
+        default:
+            break
+        }
+    }
+    @objc func reloadtableView(){
+        self.filmsTableView.reloadData()
     }
 }
 
