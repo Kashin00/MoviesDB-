@@ -17,7 +17,9 @@ class HomeViewController: UIViewController {
     private var selectedSection = 0
     private let pullToRefreshIndicator = UIRefreshControl()
     private var totalPages = 200
-    private var currentPage = 1
+    private var currentPopularPage = 1
+    private var currentTopRatepRage = 1
+    private var currentUpcomingPage = 1
     private var menu:SideMenuNavigationController?
     private var fetchingMore = false
     
@@ -221,6 +223,10 @@ extension HomeViewController: UITableViewDataSource {
                 switch selectedSection {
                 case 0:
                     fetchMorePopularMovies()
+                case 1:
+                    fetchMoreTopRatedMovies()
+                case 2:
+                    fetchMoreUpcomingMovies()
                 default:
                     break
                 }
@@ -230,10 +236,32 @@ extension HomeViewController: UITableViewDataSource {
     
     func fetchMorePopularMovies() {
         fetchingMore = true
-        if currentPage < totalPages {
-            currentPage = currentPage + 1
+        if currentPopularPage < totalPages {
+            currentPopularPage = currentPopularPage + 1
             DispatchQueue.main.async { [self] in
-                MovieManager.shared.loadMoreFilms(page: self.currentPage)
+                MovieManager.shared.loadMorePopularFilms(page: self.currentPopularPage)
+                self.fetchingMore = false
+                self.filmsTableView.reloadData()
+            }
+        }
+    }
+    
+    func fetchMoreTopRatedMovies() {
+        if currentTopRatepRage < totalPages {
+            currentTopRatepRage = currentTopRatepRage + 1
+            DispatchQueue.main.async { [self] in
+                MovieManager.shared.loadMoreTopRatedFilms(page: self.currentTopRatepRage)
+                self.fetchingMore = false
+                self.filmsTableView.reloadData()
+            }
+        }
+    }
+    
+    func fetchMoreUpcomingMovies() {
+        if currentUpcomingPage < totalPages {
+            currentUpcomingPage = currentUpcomingPage + 1
+            DispatchQueue.main.async { [self] in
+                MovieManager.shared.loadMoreUpcomingFilms(page: self.currentUpcomingPage)
                 self.fetchingMore = false
                 self.filmsTableView.reloadData()
             }

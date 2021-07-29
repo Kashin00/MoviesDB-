@@ -32,8 +32,8 @@ enum ApiType {
    
     var path: String {
         switch self {
-        case .upcoming: return "movie/upcoming" + apiKey 
-        case .topRated: return "movie/top_rated" + apiKey
+        case .upcoming: return baseAPIURL + "movie/upcoming" + apiKey + "&page="
+        case .topRated: return baseAPIURL + "movie/top_rated" + apiKey + "&page="
         case .popular: return  baseAPIURL + "movie/popular" + apiKey + "&page="
         case .random: return  "trending/movie/week" + apiKey
         case .poster: return basePosterURL
@@ -62,8 +62,8 @@ class NetworkManager {
     func fetchPopularFilms (page: Int, onCompletion: @escaping ([Movie]) -> ()) {
         
         guard let url = URL(string: ApiType.popular.path + String(page)) else {return}
+
         let request = URLRequest(url: url)
-        
         session.dataTask(with: request) { (data, responce, error) in
             guard  let data = data else { return print(error!) }
 
@@ -77,9 +77,11 @@ class NetworkManager {
         }.resume()
     }
     
-    func fetchTopRatedFilms (onCompletion: @escaping ([Movie]) -> ()) {
-        let request = ApiType.topRated.request
+    func fetchTopRatedFilms (page: Int, onCompletion: @escaping ([Movie]) -> ()) {
         
+        guard let url = URL(string: ApiType.topRated.path + String(page)) else {return}
+
+        let request = URLRequest(url: url)
         session.dataTask(with: request) { (data, responce, error) in
             guard let data = data else { return print(error!) }
 
@@ -92,8 +94,11 @@ class NetworkManager {
         }.resume()
     }
     
-    func fetchUpcomingFilms (onCompletion: @escaping ([Movie]) -> ()) {
-        let request = ApiType.upcoming.request
+    func fetchUpcomingFilms (page: Int, onCompletion: @escaping ([Movie]) -> ()) {
+        
+        guard let url = URL(string: ApiType.upcoming.path + String(page)) else {return}
+
+        let request = URLRequest(url: url)
         
         session.dataTask(with: request) { (data, responce, error) in
             guard let data = data else { return print(error!) }
