@@ -71,7 +71,7 @@ extension DetailViewController {
         releaseDateLabel.text = String(movie.releaseDate ?? "")
         ratedLabel.text = String(movie.voteAverage)
         popularityLabel.text = String(Int( movie.popularity))
-        //originalLabel.text = movie.originalLanguage
+        originalLabel.text = String(movie.voteCount)
         ganreLabel.text = movie.ganre.joined(separator: ", ")
     }
     

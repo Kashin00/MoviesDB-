@@ -78,11 +78,11 @@ final class Movie: NSObject, Decodable, NSCoding {
         overview = coder.decodeObject(forKey: CodingKeys.overview.rawValue) as? String ?? ""
         releaseDate = coder.decodeObject(forKey: CodingKeys.releaseDate.rawValue) as? String
         genreIDS = coder.decodeObject(forKey: CodingKeys.genreIDS.rawValue) as? [Int] ?? []
-        id = coder.decodeObject(forKey: CodingKeys.id.rawValue) as? Int ?? 0
+        id = coder.decodeInteger(forKey: CodingKeys.id.rawValue)
         title = coder.decodeObject(forKey: CodingKeys.title.rawValue) as? String ?? ""
-        popularity = coder.decodeObject(forKey: CodingKeys.popularity.rawValue) as? Double ?? 0.0
-        voteCount = coder.decodeObject(forKey: CodingKeys.voteCount.rawValue) as? Int ?? 0
-        voteAverage = coder.decodeObject(forKey: CodingKeys.voteAverage.rawValue) as? Double ?? 0.0
+        popularity = coder.decodeDouble(forKey: CodingKeys.popularity.rawValue)
+        voteCount = coder.decodeInteger(forKey: CodingKeys.voteCount.rawValue)
+        voteAverage = coder.decodeDouble(forKey: CodingKeys.voteAverage.rawValue)
         ganre = coder.decodeObject(forKey: CodingKeys.ganre.rawValue) as? [String] ?? []
         image = coder.decodeObject(forKey: CodingKeys.image.rawValue) as? UIImage
     }
