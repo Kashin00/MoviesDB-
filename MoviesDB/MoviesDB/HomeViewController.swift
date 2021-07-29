@@ -18,21 +18,21 @@ class HomeViewController: UIViewController {
     private let pullToRefreshIndicator = UIRefreshControl()
     private var totalPages = 200
     private var currentPage = 1
-<<<<<<< HEAD
     private var menu:SideMenuNavigationController?
-    
-=======
     private var fetchingMore = false
->>>>>>> develop
+    private var condition = NSCondition()
+    var available = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
-        createSideMenu()
+
+            self.setUpUI()
+            self.createSideMenu()
     }
     @IBAction func didPressedSideMenu(_ sender: Any) {
         present(menu!, animated: true)
     }
-    
 }
 
 //MARK: -SetUpUI func
@@ -56,11 +56,7 @@ private extension HomeViewController {
         pullToRefreshIndicator.tintColor = .white
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
-        print(MovieManager.shared.popularMovies.count)
         sleep(1)
-        MovieManager.shared.popularMovies.shuffle()
-        MovieManager.shared.topRatedMovies.shuffle()
-        MovieManager.shared.upcommingMovies.shuffle()
     }
 
     func alertForAddToFavorite() {
