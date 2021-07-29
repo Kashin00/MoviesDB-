@@ -26,6 +26,12 @@ class FilmsByGenreViewController: UIViewController {
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
+    func addedToFavorite() {
+        let alert = UIAlertController(title: UserMessages.added, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension FilmsByGenreViewController: UITableViewDelegate {
@@ -51,6 +57,7 @@ extension FilmsByGenreViewController: UITableViewDelegate {
                 if !UserDefaultsManager.shared.titles.contains(movie[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
+                    self.addedToFavorite()
                 } else {
                     self.alertForAddToFavorite()
                 }

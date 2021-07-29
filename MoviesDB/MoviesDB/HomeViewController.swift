@@ -20,9 +20,7 @@ class HomeViewController: UIViewController {
     private var currentPage = 1
     private var menu:SideMenuNavigationController?
     private var fetchingMore = false
-    private var condition = NSCondition()
-    var available = false
-    
+    private var movieManager = MovieManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +54,6 @@ private extension HomeViewController {
         pullToRefreshIndicator.tintColor = .white
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
-        sleep(1)
     }
 
     func alertForAddToFavorite() {
@@ -65,9 +62,14 @@ private extension HomeViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func addedToFavorite() {
+        let alert = UIAlertController(title: UserMessages.added, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
     func createSideMenu() {
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
-        menu?.leftSide = true
+       
         SideMenuManager.default.leftMenuNavigationController = menu
         SideMenuManager.default.addPanGestureToPresent(toView: self.view)
     }
@@ -137,6 +139,7 @@ extension HomeViewController: UITableViewDelegate {
                 if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.popularMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
+                    self.addedToFavorite()
                 } else {
                     self.alertForAddToFavorite()
                 }
@@ -144,6 +147,7 @@ extension HomeViewController: UITableViewDelegate {
                 if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.topRatedMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.topRatedMovies[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
+                    self.addedToFavorite()
                 }else {
                     self.alertForAddToFavorite()
                 }
@@ -151,6 +155,7 @@ extension HomeViewController: UITableViewDelegate {
                 if !UserDefaultsManager.shared.titles.contains(MovieManager.shared.upcommingMovies[indexPath.row].title) {
                     MovieManager.shared.favoriteMovies.append(MovieManager.shared.upcommingMovies[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
+                    self.addedToFavorite()
                 }else {
                     self.alertForAddToFavorite()
                 }
