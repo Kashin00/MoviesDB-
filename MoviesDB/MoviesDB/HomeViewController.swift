@@ -46,8 +46,10 @@ private extension HomeViewController {
         segmentControl.tintColor = UIColor.white
         segmentControl.backgroundColor = UIColor.gray
         segmentControl.selectedSegmentIndex = 0
+        let attr = NSDictionary(object: UIFont(name: "Arial", size: 13)!, forKey: NSAttributedString.Key.font as NSCopying)
+        UISegmentedControl.appearance().setTitleTextAttributes(attr as! [NSAttributedString.Key : AnyObject] , for: .normal)
         for index in 0...titles.count-1 {
-            segmentControl.setWidth(85, forSegmentAt: index)
+            segmentControl.setWidth(70, forSegmentAt: index)
         }
         segmentControl.sizeToFit()
         segmentControl.selectedSegmentIndex = 0
