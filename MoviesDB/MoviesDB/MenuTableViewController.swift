@@ -35,9 +35,8 @@ class MenuTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let currentGenre = Genre.ganresArray[indexPath.row]
-        //MovieManager.shared.loadByGenre(genre: currentGenre.id)
 
-        NetworkManager.shared.getMoviesInSameGenre(ganreId: currentGenre.id) { (movies) in
+        NetworkManager.shared.getMoviesInSameGenre(page: 1, ganreId: currentGenre.id) { (movies) in
             MovieManager.shared.genreArray = movies
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -49,6 +48,7 @@ class MenuTableViewController: UITableViewController {
             }
             genreVC.getTitle = currentGenre.name
             genreVC.movie = MovieManager.shared.genreArray
+            genreVC.genre = currentGenre.id
             navigationController?.pushViewController(genreVC, animated: true)
             MovieManager.shared.genreArray.removeAll()
         }

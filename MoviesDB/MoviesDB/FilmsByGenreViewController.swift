@@ -12,8 +12,12 @@ class FilmsByGenreViewController: UIViewController {
     @IBOutlet weak private var filmsTableView: UITableView!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRowAt = CGFloat(100)
+    private var fetchingMore = false
+    private var totalPages = 200
+    private var currentPage = 1
     
     var movie: [Movie]?
+    var genre: Int?
     var getTitle: String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +80,30 @@ extension FilmsByGenreViewController: UITableViewDelegate {
         return swipe
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        let contentHight = scrollView.contentSize.height
+        if offSetY > contentHight - scrollView.frame.height {
+            if !fetchingMore{
+                fetchMoreMovies()
+            }
+        }
+    }
+    
+    func fetchMoreMovies() {
+        fetchingMore = true
+        if currentPage < totalPages {
+            currentPage = currentPage + 1
+            DispatchQueue.main.async { [self] in
+                guard let genre = genre else {return}
+                NetworkManager.shared.getMoviesInSameGenre(page: currentPage, ganreId: genre) { (movies) in
+                    self.movie?.append(contentsOf: movies)
+                }
+                self.fetchingMore = false
+                self.filmsTableView.reloadData()
+            }
+        }
+    }
 }
 
 extension FilmsByGenreViewController: UITableViewDataSource {

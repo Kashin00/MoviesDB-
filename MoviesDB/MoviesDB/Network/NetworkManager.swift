@@ -39,7 +39,7 @@ enum ApiType {
         case .poster: return basePosterURL
         case .search: return  baseAPIURL + "search/movie" + apiKey + "&query="
         case .share: return "https://www.themoviedb.org/movie/"
-        case .genre: return baseAPIURL + "discover/movie" + apiKey + "&with_genres="
+        case .genre: return baseAPIURL + "discover/movie" + apiKey + "&page="
         }
     }
     
@@ -159,10 +159,10 @@ class NetworkManager {
         return url
     }
 
-    func getMoviesInSameGenre(ganreId: Int, onCompletion: @escaping ([Movie]) -> ()) {
-    guard let url = URL(string: ApiType.genre.path + String(ganreId) ) else { return}
+    func getMoviesInSameGenre(page: Int, ganreId: Int, onCompletion: @escaping ([Movie]) -> ()) {
+    guard let url = URL(string: ApiType.genre.path + String(page) + "&with_genres=" + String(ganreId)) else { return}
     let request = URLRequest(url: url)
-    
+    print(url)
     session.dataTask(with: request) { (data, responce, error) in
         guard  let data = data else { return print(error!) }
 

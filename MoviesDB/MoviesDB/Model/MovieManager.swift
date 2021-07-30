@@ -37,13 +37,6 @@ final class MovieManager {
         }
         
     }
-
-    
-    func loadByGenre(genre: Int) {
-        NetworkManager.shared.getMoviesInSameGenre(ganreId: genre) { (movies) in
-            self.genreArray = movies
-        }
-    }
    
     func loadMorePopularFilms (page: Int) {
         NetworkManager.shared.fetchPopularFilms(page: page) { (movies) in
