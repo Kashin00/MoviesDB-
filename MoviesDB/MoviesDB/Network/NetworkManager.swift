@@ -155,7 +155,7 @@ class NetworkManager {
     }
 
     func getMoviesInSameGenre(ganreId: Int, onCompletion: @escaping ([Movie]) -> ()) {
-    guard let url = URL(string: ApiType.genres.path + String(ganreId) ) else { return}
+    guard let url = URL(string: ApiType.genre.path + String(ganreId) ) else { return}
     let request = URLRequest(url: url)
     
     session.dataTask(with: request) { (data, responce, error) in
@@ -185,6 +185,7 @@ class NetworkManager {
             }
         }.resume()
     }
+}
 }
 
 protocol NetworkManagerDelegate: class {

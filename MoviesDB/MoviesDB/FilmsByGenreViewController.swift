@@ -25,12 +25,9 @@ class FilmsByGenreViewController: UIViewController {
 
 private extension FilmsByGenreViewController {
     func setTitle() {
-        if navigationItem.title != "TV Movie" {
-            guard let getTitle = getTitle else { return }
-            let newTitle = getTitle + " Movies"
-            navigationItem.title = newTitle
+            navigationItem.title = getTitle
         }
-    }
+    
     
     func alertForAddToFavorite() {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)

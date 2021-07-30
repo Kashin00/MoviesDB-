@@ -45,7 +45,7 @@ class MenuTableViewController: UITableViewController {
         }
         
         let currentGenre = Genre.ganresArray[indexPath.row]
-        NetworkManager.shared.getSearchResults(id: currentGenre.id) { (movies) in
+        NetworkManager.shared.getMoviesInSameGenre(ganreId: currentGenre.id) { (movies) in
             MovieManager.shared.genreArray = movies
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
