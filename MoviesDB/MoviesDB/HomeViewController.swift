@@ -17,12 +17,15 @@ class HomeViewController: UIViewController {
     private var selectedSection = 0
     private let pullToRefreshIndicator = UIRefreshControl()
     private var totalPages = 200
+    private var currentPage = 1
     private var currentPopularPage = 1
     private var currentTopRatepRage = 1
     private var currentUpcomingPage = 1
     private var menu:SideMenuNavigationController?
     private var fetchingMore = false
-    
+    private var condition = NSCondition()
+    var available = false
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +37,7 @@ class HomeViewController: UIViewController {
         createSideMenu()
     }
     @IBAction func didPressedSideMenu(_ sender: Any) {
-        present(menu!, animated: true)
+        present(menu ?? SideMenuNavigationController(rootViewController: MenuTableViewController()), animated: true)
     }
 }
 
@@ -219,7 +222,6 @@ extension HomeViewController: UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offSetY = scrollView.contentOffset.y
         let contentHight = scrollView.contentSize.height
-        
         if offSetY > contentHight - scrollView.frame.height{
             if !fetchingMore{
                 switch selectedSection {

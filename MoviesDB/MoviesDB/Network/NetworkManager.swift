@@ -39,7 +39,7 @@ enum ApiType {
         case .poster: return basePosterURL
         case .search: return  baseAPIURL + "search/movie" + apiKey + "&query="
         case .share: return "https://www.themoviedb.org/movie/"
-        case .genre: return baseAPIURL + "discover/movie" + apiKey + "&with_genres="
+        case .genre: return baseAPIURL + "discover/movie" + apiKey + "&page="
         }
     }
     
@@ -158,7 +158,22 @@ class NetworkManager {
         guard let url = URL(string: ApiType.share.path + String(id)) else { return URL(string: "")! }
         return url
     }
-    
+
+    func getMoviesInSameGenre(page: Int, ganreId: Int, onCompletion: @escaping ([Movie]) -> ()) {
+    guard let url = URL(string: ApiType.genre.path + String(page) + "&with_genres=" + String(ganreId)) else { return}
+    let request = URLRequest(url: url)
+    session.dataTask(with: request) { (data, responce, error) in
+        guard  let data = data else { return print(error!) }
+
+        do {
+            let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+            onCompletion(movieData.movies)
+        } catch {
+            print(error)
+        }
+
+    }.resume()
+
     func getSearchResults (id: Int, onCompletion: @escaping ([Movie]) -> ()) {
         guard let url = URL(string: ApiType.genre.path + String(id)) else { return }
 
@@ -174,6 +189,7 @@ class NetworkManager {
             }
         }.resume()
     }
+}
 }
 
 protocol NetworkManagerDelegate: class {

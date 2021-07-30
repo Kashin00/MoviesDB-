@@ -28,6 +28,7 @@ class DetailViewController: UIViewController {
         setUpAdditionalInfo()
         setSharedMovieButton()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         setStateConfigForAddToFavoriteButton()
     }
@@ -35,33 +36,19 @@ class DetailViewController: UIViewController {
     @IBAction func didTapAddToFavoriteVCButton(_ sender: UIButton) {
         guard let movie = movie else { return }
         if !UserDefaultsManager.shared.titles.contains(movie.title) {
+            sender.isSelected = true
             MovieManager.shared.favoriteMovies.append(movie)
             UserDefaultsManager.shared.archivedData()
-            sender.isSelected = true
         } else {
-            self.alertForAddToFavorite()
+            sender.isSelected = false
+            guard let index = MovieManager.shared.favoriteMovies.firstIndex(where: {$0.title == movie.title}) else { return }
+            MovieManager.shared.favoriteMovies.remove(at: index)
+            UserDefaultsManager.shared.archivedData()
         }
     }
-    
-    @objc func didTapShareMoviesButton(_ sender: UIBarButtonItem) {
-        guard let movie = movie else { return }
-       
-        let item = [NetworkManager.shared.getURLForShare(id: movie.id)]
-        let activityController = UIActivityViewController(activityItems: item, applicationActivities: nil)
-        self.present(activityController, animated: true, completion: nil)
-      }
 }
 
 extension DetailViewController {
-    
-    func setSharedMovieButton() {
-        let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
-        let boldSearch = UIImage(systemName: "square.and.arrow.up", withConfiguration: boldConfig)
-        
-        let sharedMovieButton = UIBarButtonItem(image: boldSearch, style: .plain, target: self, action: #selector(didTapShareMoviesButton))
-        
-        self.navigationItem.rightBarButtonItem = sharedMovieButton
-    }
     
     func setUp() {
         guard let movie = movie else { return }
@@ -77,12 +64,6 @@ extension DetailViewController {
         ganreLabel.text = movie.ganre.joined(separator: ", ")
     }
     
-    func alertForAddToFavorite() {
-        let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
     func setStateConfigForAddToFavoriteButton() {
         guard let movie = movie else { return }
         if !UserDefaultsManager.shared.titles.contains(movie.title) {
@@ -90,5 +71,22 @@ extension DetailViewController {
         } else {
             addToFavoriteButton.isSelected = true
         }
+    }
+    
+    func setSharedMovieButton() {
+        let boldConfig = UIImage.SymbolConfiguration(weight: .bold)
+        let boldSearch = UIImage(systemName: "square.and.arrow.up", withConfiguration: boldConfig)
+        
+        let sharedMovieButton = UIBarButtonItem(image: boldSearch, style: .plain, target: self, action: #selector(didTapShareMoviesButton))
+        
+        self.navigationItem.rightBarButtonItem = sharedMovieButton
+    }
+    
+    @objc func didTapShareMoviesButton(_ sender: UIBarButtonItem) {
+        guard let movie = movie else { return }
+        
+        let item = [NetworkManager.shared.getURLForShare(id: movie.id)]
+        let activityController = UIActivityViewController(activityItems: item, applicationActivities: nil)
+        self.present(activityController, animated: true, completion: nil)
     }
 }

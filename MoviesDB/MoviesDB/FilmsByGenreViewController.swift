@@ -12,8 +12,12 @@ class FilmsByGenreViewController: UIViewController {
     @IBOutlet weak private var filmsTableView: UITableView!
     private let cell = String(describing: FilmsTableViewCell.self)
     private let heightForRowAt = CGFloat(100)
+    private var fetchingMore = false
+    private var totalPages = 200
+    private var currentPage = 1
     
     var movie: [Movie]?
+    var genre: Int?
     var getTitle: String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +29,9 @@ class FilmsByGenreViewController: UIViewController {
 
 private extension FilmsByGenreViewController {
     func setTitle() {
-        if navigationItem.title != "TV Movie" {
-            guard let getTitle = getTitle else { return }
-            let newTitle = getTitle + " Movies"
-            navigationItem.title = newTitle
+            navigationItem.title = getTitle
         }
-    }
+    
     
     func alertForAddToFavorite() {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
@@ -43,6 +44,7 @@ private extension FilmsByGenreViewController {
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
 }
 
 extension FilmsByGenreViewController: UITableViewDelegate {
@@ -76,6 +78,31 @@ extension FilmsByGenreViewController: UITableViewDelegate {
         }
         let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
         return swipe
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        let contentHight = scrollView.contentSize.height
+        if offSetY > contentHight - scrollView.frame.height {
+            if !fetchingMore{
+                fetchMoreMovies()
+            }
+        }
+    }
+    
+    func fetchMoreMovies() {
+        fetchingMore = true
+        if currentPage < totalPages {
+            currentPage = currentPage + 1
+            DispatchQueue.main.async { [self] in
+                guard let genre = genre else {return}
+                NetworkManager.shared.getMoviesInSameGenre(page: currentPage, ganreId: genre) { (movies) in
+                    self.movie?.append(contentsOf: movies)
+                }
+                self.fetchingMore = false
+                self.filmsTableView.reloadData()
+            }
+        }
     }
 }
 
