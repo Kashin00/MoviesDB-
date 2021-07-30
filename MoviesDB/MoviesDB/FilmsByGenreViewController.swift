@@ -14,15 +14,32 @@ class FilmsByGenreViewController: UIViewController {
     private let heightForRowAt = CGFloat(100)
     
     var movie: [Movie]?
-    
+    var getTitle: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTitle()
         filmsTableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         filmsTableView.backgroundColor = .black
+    }
+}
+
+private extension FilmsByGenreViewController {
+    func setTitle() {
+        if navigationItem.title != "TV Movie" {
+            guard let getTitle = getTitle else { return }
+            let newTitle = getTitle + " Movies"
+            navigationItem.title = newTitle
+        }
     }
     
     func alertForAddToFavorite() {
         let alert = UIAlertController(title: UserMessages.alreadyAdded, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func addedToFavorite() {
+        let alert = UIAlertController(title: UserMessages.added, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -49,12 +66,12 @@ extension FilmsByGenreViewController: UITableViewDelegate {
            
             guard let movie = self.movie else { return }
                 if !UserDefaultsManager.shared.titles.contains(movie[indexPath.row].title) {
-                    MovieManager.shared.favoriteMovies.append(MovieManager.shared.popularMovies[indexPath.row])
+                    MovieManager.shared.favoriteMovies.append(movie[indexPath.row])
                     UserDefaultsManager.shared.archivedData()
+                    self.addedToFavorite()
                 } else {
                     self.alertForAddToFavorite()
                 }
- 
             complitionHandler(true)
         }
         let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])

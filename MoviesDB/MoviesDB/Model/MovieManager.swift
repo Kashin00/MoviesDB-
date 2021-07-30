@@ -19,8 +19,9 @@ final class MovieManager {
     var favoriteMovies = [Movie]()
     var searchMovies = [Movie]()
     var moviesByGanre = [Movie]()
+    var genreArray = [Movie]()
     
-    private init() {
+     init() {
         NetworkManager.shared.fetchTopRatedFilms{ [self](movie) in
             self.topRatedMovies = movie
         }

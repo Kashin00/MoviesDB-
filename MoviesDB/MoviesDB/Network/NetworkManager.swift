@@ -17,8 +17,7 @@ enum ApiType {
     case poster
     case search
     case share
-    case genres
-   
+    case genre
     
     var apiKey: String {
         return "?api_key=a19c5b2987101c209439576411e5c98f"
@@ -40,7 +39,7 @@ enum ApiType {
         case .poster: return basePosterURL
         case .search: return  baseAPIURL + "search/movie" + apiKey + "&query="
         case .share: return "https://www.themoviedb.org/movie/"
-        case .genres: return baseAPIURL + "discover/movie" + apiKey + "&with_genres="
+        case .genre: return baseAPIURL + "discover/movie" + apiKey + "&with_genres="
         }
     }
     
@@ -154,7 +153,7 @@ class NetworkManager {
         guard let url = URL(string: ApiType.share.path + String(id)) else { return URL(string: "")! }
         return url
     }
-    
+
     func getMoviesInSameGenre(ganreId: Int, onCompletion: @escaping ([Movie]) -> ()) {
     guard let url = URL(string: ApiType.genres.path + String(ganreId) ) else { return}
     let request = URLRequest(url: url)
@@ -170,6 +169,21 @@ class NetworkManager {
         }
 
     }.resume()
+
+    func getSearchResults (id: Int, onCompletion: @escaping ([Movie]) -> ()) {
+        guard let url = URL(string: ApiType.genre.path + String(id)) else { return }
+
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { (data, responce, error) in
+            guard let data = data else { return print(error!) }
+
+            do {
+                let movieData = try JSONDecoder().decode(MovieResponce.self, from: data)
+                onCompletion(movieData.movies)
+            } catch {
+                print(error)
+            }
+        }.resume()
     }
 }
 

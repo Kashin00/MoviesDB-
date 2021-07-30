@@ -12,4 +12,5 @@ struct UserMessages {
     static var alreadyAdded = "The movie has already been added to favorites"
     static var noFilmWithName = "There are no films with that name"
     static var correctName = "Please, enter the correct name"
+    static var added = "Movie added to favorites"
 }
