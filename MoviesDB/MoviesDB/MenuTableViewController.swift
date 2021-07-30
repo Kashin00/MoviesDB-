@@ -18,7 +18,6 @@ class MenuTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Genre.ganresArray.count
     }
@@ -41,12 +40,14 @@ class MenuTableViewController: UITableViewController {
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let genreVC = storyboard.instantiateViewController(withIdentifier: "FilmsByGenreViewController") as? FilmsByGenreViewController {
+
             while MovieManager.shared.genreArray.isEmpty {
                 sleep(1/9)
             }
             genreVC.getTitle = currentGenre.name
             genreVC.movie = MovieManager.shared.genreArray
             navigationController?.pushViewController(genreVC, animated: true)
+            MovieManager.shared.genreArray.removeAll()
         }
     }
 }
