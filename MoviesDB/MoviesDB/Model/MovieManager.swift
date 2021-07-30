@@ -18,7 +18,6 @@ final class MovieManager {
     var randomMovies = [Movie]()
     var favoriteMovies = [Movie]()
     var searchMovies = [Movie]()
-    var moviesByGanre = [Movie]()
     var genreArray = [Movie]()
     
      init() {
@@ -40,16 +39,17 @@ final class MovieManager {
     }
 
     
-    func loadByGenre(genre: Int){
+    func loadByGenre(genre: Int) {
         NetworkManager.shared.getMoviesInSameGenre(ganreId: genre) { (movies) in
-            self.moviesByGanre.append(contentsOf: movies) }
-}
-
-        func loadMorePopularFilms (page: Int) {
-            NetworkManager.shared.fetchPopularFilms(page: page) { (movies) in
-                self.popularMovies.append(contentsOf: movies)
-            }
+            self.genreArray = movies
         }
+    }
+   
+    func loadMorePopularFilms (page: Int) {
+        NetworkManager.shared.fetchPopularFilms(page: page) { (movies) in
+            self.popularMovies.append(contentsOf: movies)
+        }
+    }
     
     func loadMoreTopRatedFilms(page: Int) {
         NetworkManager.shared.fetchTopRatedFilms(page: page) { (movies) in

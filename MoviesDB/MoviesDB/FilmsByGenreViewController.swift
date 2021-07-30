@@ -40,6 +40,7 @@ private extension FilmsByGenreViewController {
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
 }
 
 extension FilmsByGenreViewController: UITableViewDelegate {
@@ -74,6 +75,7 @@ extension FilmsByGenreViewController: UITableViewDelegate {
         let swipe = UISwipeActionsConfiguration(actions: [addToFavorite])
         return swipe
     }
+    
 }
 
 extension FilmsByGenreViewController: UITableViewDataSource {

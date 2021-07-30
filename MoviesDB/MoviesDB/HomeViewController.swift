@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
         createSideMenu()
     }
     @IBAction func didPressedSideMenu(_ sender: Any) {
-        present(menu!, animated: true)
+        present(menu ?? SideMenuNavigationController(rootViewController: MenuTableViewController()), animated: true)
     }
 }
 
