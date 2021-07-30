@@ -81,7 +81,7 @@ private extension HomeViewController {
         menu = SideMenuNavigationController(rootViewController: MenuTableViewController())
         
         SideMenuManager.default.leftMenuNavigationController = menu
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: self.view, forMenu: .left)
     }
     
     func shuffle(){

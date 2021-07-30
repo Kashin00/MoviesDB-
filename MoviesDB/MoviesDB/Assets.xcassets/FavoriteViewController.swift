@@ -55,14 +55,22 @@ extension FavoriteViewController: UITableViewDelegate {
         filmsTableView.deselectRow(at: indexPath, animated: true)
         
         guard let detailVC = storyboard?.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController else {return}
-        detailVC.movie = MovieManager.shared.favoriteMovies[indexPath.row]
-        navigationController?.pushViewController(detailVC, animated: true)
+        if !MovieManager.shared.favoriteMovies.isEmpty{
+            detailVC.movie = MovieManager.shared.favoriteMovies[indexPath.row]
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
 
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MovieManager.shared.favoriteMovies.count
+        if !MovieManager.shared.favoriteMovies.isEmpty {
+            filmsTableView.backgroundView = nil
+            return MovieManager.shared.favoriteMovies.count
+        } else {
+            setLable()
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,5 +81,13 @@ extension FavoriteViewController: UITableViewDataSource {
         return cell
     }
     
-    
+    func setLable() {
+        let label = UILabel()
+        label.text = "It’s empty now. \n Add some movie at first."
+        label.textColor = UIColor.lightGray
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont(name: "TrebuchetMS", size: 17)
+        filmsTableView.backgroundView = label
+    }
 }

@@ -31,6 +31,10 @@ class SearchViewController: UIViewController {
         filmsTableView.addSubview(pullToRefreshIndicator)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        MovieManager.shared.searchMovies.removeAll()
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
