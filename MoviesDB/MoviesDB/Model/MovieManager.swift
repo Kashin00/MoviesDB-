@@ -22,11 +22,11 @@ final class MovieManager {
     var genreArray = [Movie]()
     
      init() {
-        NetworkManager.shared.fetchTopRatedFilms(page: 1){ [self](movie) in
+        NetworkManager.shared.fetchTopRatedFilms(page: 1) { [self](movie) in
             self.topRatedMovies = movie
         }
         
-        NetworkManager.shared.fetchUpcomingFilms(page: 1){ [self](movie) in
+        NetworkManager.shared.fetchUpcomingFilms(page: 1) { [self](movie) in
             self.upcommingMovies = movie
         }
         

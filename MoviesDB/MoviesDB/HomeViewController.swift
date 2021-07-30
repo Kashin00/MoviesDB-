@@ -23,7 +23,6 @@ class HomeViewController: UIViewController {
     private var currentUpcomingPage = 1
     private var menu:SideMenuNavigationController?
     private var fetchingMore = false
-    private var menu:SideMenuNavigationController?
     private var condition = NSCondition()
     var available = false
  
