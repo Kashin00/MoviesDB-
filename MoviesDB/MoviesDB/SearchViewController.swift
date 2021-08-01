@@ -29,10 +29,7 @@ class SearchViewController: UIViewController {
         pullToRefreshIndicator.tintColor = .white
         pullToRefreshIndicator.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         filmsTableView.addSubview(pullToRefreshIndicator)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        MovieManager.shared.searchMovies.removeAll()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: tapBackButton())
     }
     
     @objc func dismissKeyboard() {
@@ -43,18 +40,36 @@ class SearchViewController: UIViewController {
         alert.addAction(UIAlertAction(title: UserMessages.ok, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
     @objc func refresh(_ sender: AnyObject) {
         
         MovieManager.shared.searchMovies.shuffle()
         
         self.perform(#selector(endRefreshing), with: nil, afterDelay: 1)
     }
+    
     @objc func endRefreshing() {
         filmsTableView.reloadData()
         pullToRefreshIndicator.endRefreshing()
     }
+    
+    func tapBackButton() -> UIButton {
+        let config = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .medium, scale: .medium)
+        let backButtonImage = UIImage(systemName: "chevron.left", withConfiguration: config)?.withRenderingMode(.alwaysTemplate)
+        let backButton = UIButton(type: .custom)
+        backButton.setImage(backButtonImage, for: .normal)
+        backButton.tintColor = .systemBlue
+        backButton.setTitle(" Back", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.addTarget(self, action: #selector(removeAllDataWhenTapBackButton), for: .touchUpInside)
+        return backButton
+    }
+    
+    @objc func removeAllDataWhenTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
+        MovieManager.shared.searchMovies.removeAll()
+    }
 }
-
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForRow
