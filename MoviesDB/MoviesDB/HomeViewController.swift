@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sleep(1)
         while MovieManager.shared.popularMovies.isEmpty {
             sleep(1/9)
         }
